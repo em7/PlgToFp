@@ -1,4 +1,5 @@
 ﻿using FlpToFp.Core;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,8 @@ namespace FlpToFp
 {
     class Program
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
             if (args.Length < 1 || ArgIsHelp(args[0]))
@@ -47,12 +50,10 @@ namespace FlpToFp
                         Console.WriteLine(string.Format(msg, f));
                     }
 
+                    _logger.Error(ex, "Exception when processing file '{0}'.", f);
                     Console.ReadKey();
                 }
             }
-
-
-            
 
         }
 
