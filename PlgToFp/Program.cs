@@ -49,9 +49,9 @@ namespace FlpToFp
                 }
             }
 
-#if DEBUG
+
             Console.ReadKey();
-#endif
+
         }
 
         private static string GetNewName(string plgName)
