@@ -63,6 +63,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="fp\EGKKLEGR1.fp" />
+    <None Include="fp\lkmtlktb.fp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="plg\lkmtlktb.plg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

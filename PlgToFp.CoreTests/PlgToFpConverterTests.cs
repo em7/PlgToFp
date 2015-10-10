@@ -16,7 +16,7 @@ namespace FlpToFp.Core.Tests
         public void ConvertLkmtLktbTest()
         {
             var plg = XDocument.Load(@"./plg/lkmtlktb.plg");
-            XDocument fp = null;
+            var fp = XDocument.Load(@"./fp/lkmtlktb.fp"); ;
             var converter = new PlgToFpConverter();
             var fpConverted = converter.Convert(plg);
             Assert.IsNotNull(fpConverted, "The converted flight plan should not be null");

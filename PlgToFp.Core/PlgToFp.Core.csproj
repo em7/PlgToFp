@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ConvertException.cs" />
     <Compile Include="FlightPlan.cs" />
+    <Compile Include="FpExporter.cs" />
     <Compile Include="PlgParser.cs" />
     <Compile Include="PlgToFpConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

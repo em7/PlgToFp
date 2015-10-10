@@ -26,7 +26,6 @@ Global
 		{22DF38DB-A813-4DBC-8EF3-5D786E02BD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{22DF38DB-A813-4DBC-8EF3-5D786E02BD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22DF38DB-A813-4DBC-8EF3-5D786E02BD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22DF38DB-A813-4DBC-8EF3-5D786E02BD06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -29,8 +29,11 @@ namespace FlpToFp.Core
 
             var plgParser = new PlgParser();
             var flightPlan = plgParser.ParsePlg(plg);
-            
-            return null;
+
+            var fpExporter = new FpExporter();
+            var fp = fpExporter.CreateFp(flightPlan);
+
+            return fp;
         }
 
         
