@@ -46,11 +46,13 @@ namespace FlpToFp
                         var msg = Resources.strings.CantReadFileException;
                         Console.WriteLine(string.Format(msg, f));
                     }
+
+                    Console.ReadKey();
                 }
             }
 
 
-            Console.ReadKey();
+            
 
         }
 
