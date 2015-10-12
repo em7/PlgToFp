@@ -15,7 +15,6 @@ namespace FlpToFp.Core
     public class PlgToFpConverter
     {
         
-
         /// <summary>
         /// Converts the flight plans in memory
         /// </summary>

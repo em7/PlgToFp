@@ -11,7 +11,7 @@ namespace FlpToFp.Core
     /// <summary>
     /// Parser for the Plan-G flight plans
     /// </summary>
-    class PlgParser
+    public class PlgParser
     {
         private readonly NumberStyles COORDS_STYLE = NumberStyles.Integer | NumberStyles.AllowDecimalPoint;
 

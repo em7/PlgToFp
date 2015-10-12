@@ -3,7 +3,7 @@
     /// <summary>
     /// An internal representation of a waypoint
     /// </summary>
-    class Waypoint
+    public class Waypoint
     {
         private readonly double _latitude;
         private readonly double _longitude;

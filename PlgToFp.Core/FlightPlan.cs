@@ -9,7 +9,7 @@ namespace FlpToFp.Core
     /// <summary>
     /// An internal representation of a flight plan
     /// </summary>
-    class FlightPlan
+    public class FlightPlan
     {
 
         private string _origin;

@@ -11,7 +11,7 @@ namespace FlpToFp.Core
     /// <summary>
     /// Exporter to the iFMS format
     /// </summary>
-    class FpExporter
+    public class FpExporter
     {
         /// <summary>
         /// Creates the fp XML document in the iFMS format
