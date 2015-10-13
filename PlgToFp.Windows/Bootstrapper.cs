@@ -30,6 +30,7 @@ namespace PlgToFp.Windows
 
             var moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
             moduleCatalog.AddModule(typeof(Module.FlightPlan.FlightPlanModule));
+            moduleCatalog.AddModule(typeof(Module.App.AppModule));
         }
     }
 }

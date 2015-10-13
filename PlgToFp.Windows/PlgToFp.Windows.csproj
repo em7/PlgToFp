@@ -147,6 +147,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PlgToFp.Windows.Module.App\PlgToFp.Windows.Module.App.csproj">
+      <Project>{b5eab8e5-65f2-46bb-9c96-876a4359c37c}</Project>
+      <Name>PlgToFp.Windows.Module.App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlgToFp.Windows.Infrastructure\PlgToFp.Windows.Infrastructure.csproj">
       <Project>{6861fe46-419d-4222-b14f-4672d61f31e0}</Project>
       <Name>PlgToFp.Windows.Infrastructure</Name>

@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlgToFp.Windows.Module.FlightPlan
+namespace PlgToFp.Windows.Module.App
 {
-    public class FlightPlanModule : IModule
+    public class AppModule : IModule
     {
         private IRegionManager _regionManager;
 
-        public FlightPlanModule(IRegionManager regionManager)
+        public AppModule(IRegionManager regionManager)
         {
             _regionManager = regionManager;
         }
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(FlightPlanToolbarView));
+            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(AppToolbarView));
         }
     }
 }

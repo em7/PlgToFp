@@ -1,19 +1,22 @@
 ﻿<Window x:Class="PlgToFp.Windows.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:prism="http://prismlibrary.com/"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlgToFp.Windows"
+        xmlns:infra="clr-namespace:PlgToFp.Windows.Infrastructure;assembly=PlgToFp.Windows.Infrastructure"
         mc:Ignorable="d"
         Title="PlgToFp" Height="350" Width="525">
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top">
-            <Button Content="Load Plan-G file" />
-            <Separator />
-            <Button Content="Export as iFMS file" />
-            <Separator />
-            <Button Content="About PlgToFp" />
-        </ToolBar>
+        <ItemsControl DockPanel.Dock="Top"
+                      prism:RegionManager.RegionName="{x:Static infra:Regions.Toolbar}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
         <Grid>
             <TextBlock Text="Windows application for PlgToFp" />
