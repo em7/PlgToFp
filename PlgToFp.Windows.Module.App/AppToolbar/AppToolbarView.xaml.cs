@@ -21,8 +21,9 @@ namespace PlgToFp.Windows.Module.App.AppToolbar
     /// </summary>
     public partial class AppToolbarView : UserControl
     {
-        public AppToolbarView()
+        public AppToolbarView(AppToolbarViewModel viewmodel)
         {
+            DataContext = viewmodel;
             InitializeComponent();
         }
     }
