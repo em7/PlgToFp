@@ -1,11 +1,14 @@
-﻿using PlgToFp.Windows.Infrastructure;
+﻿using Microsoft.Practices.Unity;
+using PlgToFp.Windows.Infrastructure;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace PlgToFp.Windows.Module.App
 {
@@ -20,7 +23,7 @@ namespace PlgToFp.Windows.Module.App
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(AppToolbarView));
+            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(AppToolbar.AppToolbarView));
         }
     }
 }

@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Prism.Mvvm;
 
-namespace PlgToFp.Windows.Module.App
+namespace PlgToFp.Windows.Module.App.AppToolbar
 {
     /// <summary>
     /// Interaction logic for AppToolbarView.xaml
