@@ -19,7 +19,11 @@
                       prism:RegionManager.RegionName="{x:Static infra:Regions.Toolbar}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="{DynamicResource AccentColor3}" />
+                        </StackPanel.Background>
+                    </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

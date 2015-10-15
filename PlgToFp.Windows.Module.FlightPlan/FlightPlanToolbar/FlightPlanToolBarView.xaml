@@ -6,9 +6,8 @@
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ToolBar>
-        <Button Content="Load Plan-G FlightPlan" />
-        <Separator />
-        <Button Content="Export iFMS FlightPlan" />
-    </ToolBar>
+    <StackPanel Orientation="Horizontal">
+        <Button Content="Load Plan-G FlightPlan" Margin="4" />
+        <Button Content="Export iFMS FlightPlan" Margin="4" />
+    </StackPanel>
 </UserControl>
