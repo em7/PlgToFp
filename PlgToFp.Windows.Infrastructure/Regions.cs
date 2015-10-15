@@ -9,6 +9,7 @@ namespace PlgToFp.Windows.Infrastructure
     public class Regions
     {
         public static readonly string Toolbar = "TOOLBAR";
+        public static readonly string RightWindowCommands = "RIGHTWINDOWCOMMANDS";
 
     }
 }

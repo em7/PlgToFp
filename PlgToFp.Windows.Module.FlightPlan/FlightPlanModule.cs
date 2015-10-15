@@ -20,7 +20,7 @@ namespace PlgToFp.Windows.Module.FlightPlan
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(FlightPlanToolbarView));
+            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(FlightPlanToolbar.FlightPlanToolbarView));
         }
     }
 }

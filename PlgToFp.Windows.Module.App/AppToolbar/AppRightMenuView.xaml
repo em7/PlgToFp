@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlgToFp.Windows.Module.App.AppToolbar.AppToolbarView"
+﻿<UserControl x:Class="PlgToFp.Windows.Module.App.AppToolbar.AppRightMenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.App.AppToolbar"
              xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=local:AppToolbarViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DataContext="{d:DesignInstance Type=local:AppRightMenuViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="24" d:DesignWidth="300">
     <!--<UserControl.DataContext>
         <local:AppToolbarViewModel />
     </UserControl.DataContext>-->
-    <ToolBar>
+    <!--<ToolBar>
         <Button Content="About" Command="{Binding HelloCommand}" />
-    </ToolBar>
+    </ToolBar>-->
+         <Button Content="About" Command="{Binding Path=HelloCommand}"/>
 </UserControl>

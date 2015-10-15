@@ -19,9 +19,9 @@ namespace PlgToFp.Windows.Module.App.AppToolbar
     /// <summary>
     /// Interaction logic for AppToolbarView.xaml
     /// </summary>
-    public partial class AppToolbarView : UserControl
+    public partial class AppRightMenuView : UserControl
     {
-        public AppToolbarView(AppToolbarViewModel viewmodel)
+        public AppRightMenuView(AppRightMenuViewModel viewmodel)
         {
             DataContext = viewmodel;
             InitializeComponent();

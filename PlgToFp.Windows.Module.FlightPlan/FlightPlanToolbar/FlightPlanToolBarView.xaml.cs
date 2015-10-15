@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PlgToFp.Windows.Module.FlightPlan
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
 {
     /// <summary>
     /// Interaction logic for FlightPlanToolBar.xaml

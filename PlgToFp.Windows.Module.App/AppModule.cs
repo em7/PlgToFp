@@ -23,7 +23,7 @@ namespace PlgToFp.Windows.Module.App
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(AppToolbar.AppToolbarView));
+            _regionManager.RegisterViewWithRegion(Regions.RightWindowCommands, typeof(AppToolbar.AppRightMenuView));
         }
     }
 }
