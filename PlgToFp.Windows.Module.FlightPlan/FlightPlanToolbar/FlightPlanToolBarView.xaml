@@ -3,25 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan"
+             xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar"
              x:Class="PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar.FlightPlanToolbarView"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DesignHeight="100" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance local:FlightPlanToolBarViewModel}">
     <UserControl.Resources>
         
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <Button x:Name="button" Width="90"
-			Height="65"
-			Margin="4"
-            Style="{StaticResource ToolbarButtonStyle}">
+                Height="65"
+                Margin="4"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Command="{Binding OpenPlanGCommand}">
             <StackPanel>
                 <Rectangle Width="20"
-					Height="20"
-					Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                           Height="20"
+                           Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                     <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill"
-							Visual="{DynamicResource appbar_city}" />
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_city}" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
                 <TextBlock TextAlignment="Center"><Run Text="Open Plan-G"/><LineBreak /><Run Text="Flight Plan"/></TextBlock>
@@ -31,14 +32,14 @@
         <Button Width="90"
                 Height="65"
                 Margin="4"
-                Style="{StaticResource ToolbarButtonStyle}">
+                Style="{StaticResource ToolbarButtonStyle}"
+                Command="{Binding ExportIfmsCommand}">
             <StackPanel>
                 <Rectangle Width="20"
-					Height="20"
-					Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                           Height="20"
+                           Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                     <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Fill"
-							Visual="{DynamicResource appbar_city}" />
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_city}" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
                 <TextBlock TextAlignment="Center"><Run Text="Export iFMS"/><LineBreak /><Run Text="Route"/></TextBlock>

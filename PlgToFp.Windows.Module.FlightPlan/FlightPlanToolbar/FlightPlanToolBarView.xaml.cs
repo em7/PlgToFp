@@ -20,8 +20,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
     /// </summary>
     public partial class FlightPlanToolbarView : UserControl
     {
-        public FlightPlanToolbarView()
+        public FlightPlanToolbarView(FlightPlanToolBarViewModel viewmodel)
         {
+            this.DataContext = viewmodel;
             InitializeComponent();
         }
     }
