@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace FlpToFp.Core
+namespace PlgToFp.Core
 {
     /// <summary>
     /// Converter for Plan-G (plg) format to iFMS (fp) format

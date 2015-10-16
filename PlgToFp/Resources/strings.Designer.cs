@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FlpToFp.Resources {
+namespace PlgToFp.Resources {
     using System;
     
     

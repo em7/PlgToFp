@@ -1,4 +1,4 @@
-﻿namespace FlpToFp.Core
+﻿namespace PlgToFp.Core
 {
     /// <summary>
     /// An internal representation of a waypoint

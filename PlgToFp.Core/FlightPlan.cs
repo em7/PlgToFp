@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlpToFp.Core
+namespace PlgToFp.Core
 {
     /// <summary>
     /// An internal representation of a flight plan

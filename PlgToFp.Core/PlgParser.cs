@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FlpToFp.Core
+namespace PlgToFp.Core
 {
     /// <summary>
     /// Parser for the Plan-G flight plans

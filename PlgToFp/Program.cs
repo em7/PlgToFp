@@ -1,4 +1,4 @@
-﻿using FlpToFp.Core;
+﻿using PlgToFp.Core;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FlpToFp
+namespace PlgToFp
 {
     class Program
     {
