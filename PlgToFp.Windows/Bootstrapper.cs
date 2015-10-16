@@ -29,8 +29,9 @@ namespace PlgToFp.Windows
             base.ConfigureModuleCatalog();
 
             var moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof(Module.FlightPlan.FlightPlanModule));
             moduleCatalog.AddModule(typeof(Module.App.AppModule));
+            moduleCatalog.AddModule(typeof(Module.FlightPlan.FlightPlanModule));
+            
         }
     }
 }

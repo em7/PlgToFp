@@ -95,6 +95,7 @@
       <DependentUpon>AppRightMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppToolbar\AppToolbarViewModel.cs" />
+    <Compile Include="Interaction\InteractionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

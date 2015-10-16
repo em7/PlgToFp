@@ -15,15 +15,19 @@ namespace PlgToFp.Windows.Module.App
     public class AppModule : IModule
     {
         private IRegionManager _regionManager;
+        private IUnityContainer _container;
 
-        public AppModule(IRegionManager regionManager)
+        public AppModule(IRegionManager regionManager, IUnityContainer container)
         {
             _regionManager = regionManager;
+            _container = container;
         }
 
         public void Initialize()
         {
             _regionManager.RegisterViewWithRegion(Regions.RightWindowCommands, typeof(AppToolbar.AppRightMenuView));
+
+            _container.RegisterType(typeof(IInteractionService), typeof(InteractionService));
         }
     }
 }

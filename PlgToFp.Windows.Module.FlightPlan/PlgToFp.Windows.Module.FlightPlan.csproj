@@ -95,10 +95,13 @@
       <DependentUpon>FlightPlanToolBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
+    <Compile Include="FlightPlan\FlightPlanIoService.cs" />
+    <Compile Include="FlightPlan\FlightPlanModel.cs" />
     <Compile Include="FlightPlan\FlightPlanView.xaml.cs">
       <DependentUpon>FlightPlanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlightPlan\FlightPlanViewModel.cs" />
+    <Compile Include="FlightPlan\IFlightPlanIoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +129,10 @@
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PlgToFp.Core\PlgToFp.Core.csproj">
+      <Project>{642c2c81-04ee-4252-ac85-e4096cd0e5b7}</Project>
+      <Name>PlgToFp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlgToFp.Windows.Infrastructure\PlgToFp.Windows.Infrastructure.csproj">
       <Project>{6861fe46-419d-4222-b14f-4672d61f31e0}</Project>
       <Name>PlgToFp.Windows.Infrastructure</Name>
