@@ -8,6 +8,8 @@
         xmlns:infra="clr-namespace:PlgToFp.Windows.Infrastructure;assembly=PlgToFp.Windows.Infrastructure"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
+        BorderThickness="1"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
         Title="PlgToFp" Height="350" Width="525">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
@@ -20,15 +22,13 @@
                       Background="{DynamicResource GrayBrush10}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="5">
+                    <StackPanel Orientation="Horizontal" Margin="4">
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <Grid>
-            <TextBlock Text="Windows application for PlgToFp" />
-        </Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static infra:Regions.Main}" />
     </DockPanel>
     
 </controls:MetroWindow>

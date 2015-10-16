@@ -10,6 +10,7 @@ namespace PlgToFp.Windows.Infrastructure
     {
         public static readonly string Toolbar = "TOOLBAR";
         public static readonly string RightWindowCommands = "RIGHTWINDOWCOMMANDS";
+        public static readonly string Main = "MAIN";
 
     }
 }

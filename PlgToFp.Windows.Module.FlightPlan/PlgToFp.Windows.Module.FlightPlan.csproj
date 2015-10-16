@@ -94,6 +94,11 @@
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarView.xaml.cs">
       <DependentUpon>FlightPlanToolBarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
+    <Compile Include="FlightPlan\FlightPlanView.xaml.cs">
+      <DependentUpon>FlightPlanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightPlan\FlightPlanViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -128,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="FlightPlanToolbar\FlightPlanToolBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightPlan\FlightPlanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
