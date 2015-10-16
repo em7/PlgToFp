@@ -16,13 +16,11 @@
     </controls:MetroWindow.RightWindowCommands>
     <DockPanel>
         <ItemsControl DockPanel.Dock="Top"
-                      prism:RegionManager.RegionName="{x:Static infra:Regions.Toolbar}">
+                      prism:RegionManager.RegionName="{x:Static infra:Regions.Toolbar}"
+                      Background="{DynamicResource GrayBrush10}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel.Background>
-                            <SolidColorBrush Color="{DynamicResource AccentColor3}" />
-                        </StackPanel.Background>
+                    <StackPanel Orientation="Horizontal" Margin="5">
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
