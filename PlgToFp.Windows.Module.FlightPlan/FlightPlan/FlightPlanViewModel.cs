@@ -132,21 +132,21 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
 
             var sb = new StringBuilder();
-            sb.AppendLine("Opening the flight plan was not successful.");
+            sb.Append("Opening the flight plan was not successful.");
             if (io)
             {
                 identified = true;
-                sb.AppendLine("Please check the file if is accessible and you have permissions to read it.");
+                sb.Append(Environment.NewLine + "Please check the file if is accessible and you have permissions to read it.");
             }
             if (xml || convert)
             {
                 identified = true;
-                sb.AppendLine("Please check the format of the flight plan.");
+                sb.Append(Environment.NewLine + "Please check the format of the flight plan.");
             }
 
             if (! identified)
             {
-                sb.AppendLine("The flight plan could not be read.");
+                sb.Append(Environment.NewLine + "The flight plan could not be read.");
             }
 
 

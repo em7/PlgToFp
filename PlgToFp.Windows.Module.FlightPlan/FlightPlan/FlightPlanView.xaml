@@ -53,12 +53,18 @@
                 </Style>
             </Grid.Style>
 
-            <TextBlock Margin="0,10,0,0"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="0,0,0,0"
+                       Padding="0,15"
                        Text="{Binding Path=ErrorMessage, Mode=OneWay}"
                        TextAlignment="Center"
                        FontWeight="Bold"
                        FontSize="15"
                        Foreground="{DynamicResource ValidationSummaryColor2}"
+                       Background="{DynamicResource ValidationSummaryFillColor2}"
                        />
         </Grid>
     </Grid>
