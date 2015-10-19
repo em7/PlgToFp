@@ -98,6 +98,8 @@
     <Compile Include="FlightPlan\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\FlightPlanModel.cs" />
     <Compile Include="FlightPlan\FlightPlanModelBuilder.cs" />
+    <Compile Include="FlightPlan\FlightPlanOpenErrorEvent.cs" />
+    <Compile Include="FlightPlan\FlightPlanOpenErrorEventPayload.cs" />
     <Compile Include="FlightPlan\FlightPlanReqPlanGOpenEvent.cs" />
     <Compile Include="FlightPlan\FlightPlanReqPlanGOpenEventPayload.cs" />
     <Compile Include="FlightPlan\FlightPlanReqPlanShowEvent.cs" />

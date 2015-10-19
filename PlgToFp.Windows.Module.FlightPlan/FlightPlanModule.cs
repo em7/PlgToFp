@@ -16,6 +16,8 @@ namespace PlgToFp.Windows.Module.FlightPlan
         private IRegionManager _regionManager;
         private IUnityContainer _container;
 
+        //private IFlightPlanIoService _flightPlanIoService;
+
         public FlightPlanModule(IRegionManager regionManager, IUnityContainer container)
         {
             _regionManager = regionManager;
@@ -24,7 +26,7 @@ namespace PlgToFp.Windows.Module.FlightPlan
 
         public void Initialize()
         {
-            _container.RegisterType(typeof(IFlightPlanIoService), typeof(FlightPlanIoService));
+            _container.RegisterInstance(typeof(IFlightPlanIoService), _container.Resolve<FlightPlanIoService>());
 
             _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(FlightPlanToolbar.FlightPlanToolbarView));
             _regionManager.RegisterViewWithRegion(Regions.Main, typeof(FlightPlan.FlightPlanView));

@@ -15,7 +15,6 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
     {
         #region Private Fields
         private IInteractionService _interactionService;
-        private IFlightPlanIoService _flightPlanIoService;
         private IEventAggregator _evtAggregator;
         #endregion
 
@@ -25,11 +24,10 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
         #endregion
 
         #region ctor
-        public FlightPlanToolBarViewModel(IInteractionService interactionService, IFlightPlanIoService flightPlanIoService, IEventAggregator evtAggregator)
+        public FlightPlanToolBarViewModel(IInteractionService interactionService, IEventAggregator evtAggregator)
         {
             InitializeCommands();
             _interactionService = interactionService;
-            _flightPlanIoService = flightPlanIoService;
             _evtAggregator = evtAggregator;
         }
 
