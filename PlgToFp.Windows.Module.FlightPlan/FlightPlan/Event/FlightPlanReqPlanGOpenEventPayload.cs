@@ -1,4 +1,4 @@
-﻿namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+﻿namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event
 {
     /// <summary>
     /// Event data for request for opening the Plan-G flight plan

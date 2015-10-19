@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event
 {
     public class FlightPlanOpenErrorEventPayload
     {

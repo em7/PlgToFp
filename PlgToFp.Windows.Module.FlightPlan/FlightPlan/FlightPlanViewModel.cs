@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
     public class FlightPlanViewModel : BindableBase
@@ -34,16 +36,18 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         /// <param name="obj"></param>
         private void OnReqPlanShow(FlightPlanReqPlanShowEventPayload payload)
         {
-            HasError = !HasError;
+            HasError = false;
+            ErrorMessage = null;
             FlightPlan = payload.FlightPlan;
         }
 
         /// <summary>
         /// Event handler when error ocurred during opening
         /// </summary>
-        private void OnOpenPlanError(FlightPlanOpenErrorEventPayload obj)
+        private void OnOpenPlanError(FlightPlanOpenErrorEventPayload payload)
         {
             HasError = true;
+            ErrorMessage = GetErrorMessageFor(payload.Exception);
             FlightPlan = null;
         }
         #endregion
@@ -73,7 +77,26 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
         }
 
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set { _errorMessage = value; }
+        }
+
+
         #endregion
 
+        #region private functions
+        private string GetErrorMessageFor(Exception exception)
+        {
+            if (exception is AggregateException)
+            {
+
+            }
+            return "";
+        }
+        #endregion
     }
 }

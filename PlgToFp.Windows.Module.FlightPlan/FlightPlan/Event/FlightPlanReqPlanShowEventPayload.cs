@@ -1,4 +1,4 @@
-﻿namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+﻿namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event
 {
     /// <summary>
     /// Event payload for requesting flight plan displaying

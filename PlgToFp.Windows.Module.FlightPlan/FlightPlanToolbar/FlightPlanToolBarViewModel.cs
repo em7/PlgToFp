@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
 {
     public class FlightPlanToolBarViewModel : BindableBase
