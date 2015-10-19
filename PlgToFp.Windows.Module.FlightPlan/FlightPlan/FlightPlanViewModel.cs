@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+using System.IO;
+using System.Xml;
+using PlgToFp.Core;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
@@ -47,7 +50,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         private void OnOpenPlanError(FlightPlanOpenErrorEventPayload payload)
         {
             HasError = true;
-            ErrorMessage = GetErrorMessageFor(payload.Exception);
+            ErrorMessage = GetOpenFpErrorMessageFor(payload.Exception);
             FlightPlan = null;
         }
         #endregion
@@ -82,20 +85,72 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         public string ErrorMessage
         {
             get { return _errorMessage; }
-            set { _errorMessage = value; }
+            set
+            {
+                SetProperty(ref _errorMessage, value);
+                OnPropertyChanged(() => ErrorMessage);
+            }
         }
 
 
         #endregion
 
         #region private functions
-        private string GetErrorMessageFor(Exception exception)
+        /// <summary>
+        /// Checks the exceptions which can occur during opening the flight plan and
+        /// returns appropriate error messages which can be displayed on the UI
+        /// </summary>
+        /// <param name="exception">Exception or AggregateException</param>
+        /// <returns>the error message to be displayed or null if exception is null</returns>
+        private string GetOpenFpErrorMessageFor(Exception exception)
         {
+            if (exception == null) return null;
+
+            bool io = false;
+            bool xml = false;
+            bool convert = false;
+
+            bool identified = false; //at least one of the exceptions was identified
+
             if (exception is AggregateException)
             {
+                 var aggregateExc = (AggregateException)exception;
+                aggregateExc.Flatten().Handle(ex =>
+                {
+                    if (ex is IOException) io = true;
+                    if (ex is XmlException) xml = true;
+                    if (ex is FlightPlanConvertException) convert = true;
 
+                    return true;
+                });
             }
-            return "";
+            else
+            {
+                if (exception is IOException) io = true;
+                if (exception is XmlException) xml = true;
+                if (exception is FlightPlanConvertException) convert = true;
+            }
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Opening the flight plan was not successful.");
+            if (io)
+            {
+                identified = true;
+                sb.AppendLine("Please check the file if is accessible and you have permissions to read it.");
+            }
+            if (xml || convert)
+            {
+                identified = true;
+                sb.AppendLine("Please check the format of the flight plan.");
+            }
+
+            if (! identified)
+            {
+                sb.AppendLine("The flight plan could not be read.");
+            }
+
+
+            return sb.ToString();
         }
         #endregion
     }
