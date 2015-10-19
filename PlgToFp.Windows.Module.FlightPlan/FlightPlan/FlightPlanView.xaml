@@ -4,23 +4,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
+             xmlns:infraConverters="clr-namespace:PlgToFp.Windows.Infrastructure.Converters;assembly=PlgToFp.Windows.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
+    <UserControl.Resources>
+        <infraConverters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisCollapsedConverter" />
+    </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Origin" />
-            <TextBlock Text="{Binding Path=FlightPlan.Origin}"
-                       Margin="4,0,0,0"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Destination" />
-            <TextBlock Text="{Binding Path=FlightPlan.Destination}"
-                       Margin="4,0,0,0"/>
-        </StackPanel>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=HasError, Mode=TwoWay}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Origin" />
+                <TextBlock Text="{Binding Path=FlightPlan.Origin, TargetNullValue='', FallbackValue=''}"
+                           Margin="4,0,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="Destination" />
+                <TextBlock Text="{Binding Path=FlightPlan.Destination, TargetNullValue='', FallbackValue=''}"
+                           Margin="4,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        
+        <!-- error message -->
+        <Grid>
+            <!--<Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=HasError, Mode=TwoWay}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>-->
+
+            <TextBlock Margin="0,50,0,0" Text="Error ocurred.">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasError}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

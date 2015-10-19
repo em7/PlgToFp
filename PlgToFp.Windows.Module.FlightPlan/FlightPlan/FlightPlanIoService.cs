@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Linq;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
@@ -47,42 +49,52 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         }
 
         /// <summary>
-        /// Async version of LoadPlanGFlightPlan
-        /// </summary>
-        public Task<FlightPlanModel> LoadPlanGFlightPlanAsync(string path)
-        {
-            return Task.Run(() => LoadPlanGFlightPlan(path));
-        }
-
-        /// <summary>
         /// Handler for event - PlanG flight plan open requested
         /// </summary>
-        private async void OnReqPlanGOpen(FlightPlanReqPlanGOpenEventPayload payload)
+        private void OnReqPlanGOpen(FlightPlanReqPlanGOpenEventPayload payload)
         {
             if (payload == null || string.IsNullOrWhiteSpace(payload.Path))
                 return;
 
-            FlightPlanModel fplModel = null;
+            var task = Task.Run(() => ParsePlanGFlightPlan(payload.Path))
+                .ContinueWith(FlightPlanParsed, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private void FlightPlanParsed(Task<Core.FlightPlan> task)
+        {
+            if (task.Exception != null)
+            {
+                RaiseFlightPlanParseExceptionEvent(task.Exception);
+                return;
+            }
 
             try
             {
-                var flightplan = await ParsePlanGFlightPlanAsync(payload.Path);
                 var builder = new FlightPlanModelBuilder();
-                builder.ForFlightPlan(flightplan);
-                fplModel = builder.Build();
+                builder.ForFlightPlan(task.Result);
+                var fplModel = builder.Build();
+                RaiseFlightPlanParseOkEvent(fplModel);
             }
             catch (Exception ex)
             {
-                var message = string.Format("Exception in OnReqPlanGOpen:\n{0}", ex.ToString());
-                _logger.Log(message, Category.Exception, Priority.Medium);
-
-                var evtPayload = new FlightPlanOpenErrorEventPayload()
-                {
-                    Exception = ex
-                };
-                _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>().Publish(evtPayload);
+                RaiseFlightPlanParseExceptionEvent(task.Exception);
             }
+        }
 
+        private void RaiseFlightPlanParseExceptionEvent(AggregateException exception)
+        {
+            var message = string.Format("Exception in OnReqPlanGOpen:\n{0}", exception.ToString());
+            _logger.Log(message, Category.Exception, Priority.Medium);
+
+            var evtPayload = new FlightPlanOpenErrorEventPayload()
+            {
+                Exception = exception
+            };
+            _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>().Publish(evtPayload);
+        }
+
+        private void RaiseFlightPlanParseOkEvent(FlightPlanModel fplModel)
+        {
             var showEvtPayload = new FlightPlanReqPlanShowEventPayload()
             {
                 FlightPlan = fplModel
@@ -92,24 +104,19 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         private Core.FlightPlan ParsePlanGFlightPlan(string path)
         {
-            try
-            {
-                var plgDoc = XDocument.Load(path);
-                var parser = new Core.PlgParser();
-                var flightPlan = parser.ParsePlg(plgDoc);
-                return flightPlan;
-            }
-            catch (Exception ex)
-            {
-                var message = string.Format("Exception when parsing PlanGFlightPlan:\n{0}", ex.ToString());
-                _logger.Log(message, Category.Exception, Priority.Medium);
-                throw;
-            }
+            var plgDoc = XDocument.Load(path);
+            var parser = new Core.PlgParser();
+            var flightPlan = parser.ParsePlg(plgDoc);
+            return flightPlan;
         }
 
-        private Task<Core.FlightPlan> ParsePlanGFlightPlanAsync(string path)
+        private FlightPlanModel BuildFlightPlanModel(Core.FlightPlan flightPlan)
         {
-            return Task.Run(() => ParsePlanGFlightPlan(path));
+            var builder = new FlightPlanModelBuilder();
+            builder.ForFlightPlan(flightPlan);
+            var fplModel = builder.Build();
+            return fplModel;
         }
+
     }
 }

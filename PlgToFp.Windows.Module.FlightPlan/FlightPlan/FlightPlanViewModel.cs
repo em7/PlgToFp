@@ -23,7 +23,8 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             _evtAggregator = evtAggregator;
 
             _evtAggregator.GetEvent<FlightPlanReqPlanShowEvent>().Subscribe(OnReqPlanShow);
-        } 
+            _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>().Subscribe(OnOpenPlanError);
+        }
         #endregion
 
         #region event handlers
@@ -33,8 +34,18 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         /// <param name="obj"></param>
         private void OnReqPlanShow(FlightPlanReqPlanShowEventPayload payload)
         {
+            HasError = !HasError;
             FlightPlan = payload.FlightPlan;
-        } 
+        }
+
+        /// <summary>
+        /// Event handler when error ocurred during opening
+        /// </summary>
+        private void OnOpenPlanError(FlightPlanOpenErrorEventPayload obj)
+        {
+            HasError = true;
+            FlightPlan = null;
+        }
         #endregion
 
         #region Properties
@@ -48,7 +59,20 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
                 SetProperty(ref _flightPlan, value);
                 OnPropertyChanged(() => FlightPlan);
             }
-        } 
+        }
+
+        private bool _hasError;
+
+        public bool HasError
+        {
+            get { return _hasError; }
+            set
+            {
+                SetProperty(ref _hasError, value);
+                OnPropertyChanged(() => HasError);
+            }
+        }
+
         #endregion
 
     }

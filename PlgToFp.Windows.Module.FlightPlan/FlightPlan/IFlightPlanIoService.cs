@@ -14,10 +14,5 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         /// <returns>loaded flight plan</returns>
         /// <exception cref="ArgumentNullException">path is null</exception>
         FlightPlanModel LoadPlanGFlightPlan(string path);
-
-        /// <summary>
-        /// Async version of LoadPlanGFlightPlan
-        /// </summary>
-        Task<FlightPlanModel> LoadPlanGFlightPlanAsync(string path);
     }
 }

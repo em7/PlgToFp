@@ -50,8 +50,6 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
             if (string.IsNullOrWhiteSpace(path))
                 return;
 
-            //TODO publish event instead
-            //var plan = await _flightPlanIoService.LoadPlanGFlightPlanAsync(path);
             var evtPayload = new FlightPlanReqPlanGOpenEventPayload() { Path = path };
             _evtAggregator.GetEvent<FlightPlanReqPlanGOpenEvent>().Publish(evtPayload);
         } 
