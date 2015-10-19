@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Prism.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace PlgToFp.Windows.Infrastructure
     /// </summary>
     public class InteractionService : IInteractionService
     {
+        private ILoggerFacade _logger;
+
+        public InteractionService(ILoggerFacade logger)
+        {
+            _logger = logger;
+        }
+
         public string ShowOpenFileDialog()
         {
             var dlg = new OpenFileDialog();

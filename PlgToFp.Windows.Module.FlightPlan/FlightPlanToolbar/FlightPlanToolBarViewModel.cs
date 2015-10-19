@@ -1,6 +1,7 @@
 ﻿using PlgToFp.Windows.Infrastructure;
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
         #region Private Fields
         private IInteractionService _interactionService;
         private IFlightPlanIoService _flightPlanIoService;
+        private IEventAggregator _evtAggregator;
         #endregion
 
         #region Commands
@@ -23,11 +25,12 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
         #endregion
 
         #region ctor
-        public FlightPlanToolBarViewModel(IInteractionService interactionService, IFlightPlanIoService flightPlanIoService)
+        public FlightPlanToolBarViewModel(IInteractionService interactionService, IFlightPlanIoService flightPlanIoService, IEventAggregator evtAggregator)
         {
             InitializeCommands();
             _interactionService = interactionService;
             _flightPlanIoService = flightPlanIoService;
+            _evtAggregator = evtAggregator;
         }
 
         private void InitializeCommands()
@@ -50,7 +53,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
                 return;
 
             //TODO publish event instead
-            var plan = await _flightPlanIoService.LoadPlanGFlightPlanAsync(path);
+            //var plan = await _flightPlanIoService.LoadPlanGFlightPlanAsync(path);
+            var evtPayload = new FlightPlanReqPlanGOpenEventPayload() { Path = path };
+            _evtAggregator.GetEvent<FlightPlanReqPlanGOpenEvent>().Publish(evtPayload);
         } 
         #endregion
     }

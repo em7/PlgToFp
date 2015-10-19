@@ -8,6 +8,19 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
     <Grid>
-            <TextBlock Text="FlightPlanView" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Origin" />
+            <TextBlock Text="{Binding Path=FlightPlan.Origin}"
+                       Margin="4,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Destination" />
+            <TextBlock Text="{Binding Path=FlightPlan.Destination}"
+                       Margin="4,0,0,0"/>
+        </StackPanel>
     </Grid>
 </UserControl>

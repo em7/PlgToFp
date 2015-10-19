@@ -55,11 +55,6 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         }
         #endregion
 
-        #region Functions
-        public async Task LoadFlightPlan(string path)
-        {
 
-        }
-        #endregion
     }
 }

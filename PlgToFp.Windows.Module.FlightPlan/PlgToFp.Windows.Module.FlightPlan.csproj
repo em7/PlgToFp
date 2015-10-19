@@ -97,6 +97,11 @@
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
     <Compile Include="FlightPlan\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\FlightPlanModel.cs" />
+    <Compile Include="FlightPlan\FlightPlanModelBuilder.cs" />
+    <Compile Include="FlightPlan\FlightPlanReqPlanGOpenEvent.cs" />
+    <Compile Include="FlightPlan\FlightPlanReqPlanGOpenEventPayload.cs" />
+    <Compile Include="FlightPlan\FlightPlanReqPlanShowEvent.cs" />
+    <Compile Include="FlightPlan\FlightPlanReqPlanShowEventPayload.cs" />
     <Compile Include="FlightPlan\FlightPlanView.xaml.cs">
       <DependentUpon>FlightPlanView.xaml</DependentUpon>
     </Compile>
@@ -126,7 +131,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlgToFp.Core\PlgToFp.Core.csproj">
@@ -147,16 +151,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Icons.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\WindowsIcons-license.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
