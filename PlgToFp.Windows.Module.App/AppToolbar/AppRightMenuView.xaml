@@ -8,11 +8,31 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:AppRightMenuViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="24" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/AppResources.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/PlgToFp.Windows.Module.App;component/Resources/AppResources.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <!--<UserControl.DataContext>
         <local:AppToolbarViewModel />
     </UserControl.DataContext>-->
     <!--<ToolBar>
         <Button Content="About" Command="{Binding HelloCommand}" />
     </ToolBar>-->
-         <Button Content="About" Command="{Binding Path=HelloCommand}"/>
+    <Button Command="{Binding Path=HelloCommand}">
+        <StackPanel Orientation="Horizontal">
+            <Rectangle Width="14" Height="14"
+                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                 Visual="{StaticResource about_icon}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock Text="About"
+                       Margin="3,0,0,0"/>
+        </StackPanel>
+    </Button>
 </UserControl>
