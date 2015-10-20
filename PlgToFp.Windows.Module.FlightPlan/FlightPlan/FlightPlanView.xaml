@@ -5,19 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
              xmlns:infraConverters="clr-namespace:PlgToFp.Windows.Infrastructure.Converters;assembly=PlgToFp.Windows.Infrastructure"
+             xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
     <UserControl.Resources>
         <infraConverters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisCollapsedConverter" />
     </UserControl.Resources>
-    <Grid Margin="4">
+    <Grid>
         <!--Main Content-->
-        <Grid Visibility="Visible">
-            <!--DEBUG-->
+        <Grid Margin="4">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=FlightPlan, Mode=TwoWay}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                         <DataTrigger Binding="{Binding Path=HasError, Mode=TwoWay}" Value="True">
                             <Setter Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
@@ -27,18 +30,17 @@
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
 
                 <TextBlock Grid.Column="0"
                            Text="{Binding Path=FlightPlan.Origin, TargetNullValue='', FallbackValue=''}"
                            Style="{StaticResource HeaderTextBlockStyle}"/>
-                <Rectangle
-                	Width="15" Height="15"
-                	Fill="{DynamicResource AccentColorBrush}"
-                	Margin="12,3,12,0"
-                	HorizontalAlignment="Center">
+                <Rectangle  Width="15" Height="15"
+                            Fill="{DynamicResource AccentColorBrush}"
+                            Margin="12,3,12,0"
+                            HorizontalAlignment="Center">
                     <Rectangle.OpacityMask>
                         <VisualBrush Stretch="Fill" 
                                      Visual="{StaticResource appbar_navigate_next}" />
@@ -48,15 +50,30 @@
                 <TextBlock Grid.Column="2"
                            Text="{Binding Path=FlightPlan.Destination, TargetNullValue='', FallbackValue=''}"
                            Style="{StaticResource HeaderTextBlockStyle}"/>
-
-                
-                
             </StackPanel>
 
+            <ListView Grid.Row="1"
+                      Margin="0,4,0,4"
+                      ItemsSource="{Binding Path=FlightPlan.Waypoints}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical"
+                                    Margin="0,0,0,3">
+                            <TextBlock Text="{Binding Path=Identifier}"
+                                       Style="{StaticResource TextLarger}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Latitude}" />
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding Longitude}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
         
         <!-- error message -->
-        <Grid Visibility="Collapsed"> <!--DEBUG-->
+        <Grid>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible" />

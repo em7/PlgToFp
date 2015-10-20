@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PlgToFp.Core;
+using System.Collections.ObjectModel;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
 {
@@ -14,10 +15,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
     /// </summary>
     public class FlightPlanModel : BindableBase
     {
-        #region Properties
+        #region Private fields
         private Core.FlightPlan _flightPlan;
+        #endregion
 
-
+        #region Bindable properties
         private string _origin;
 
         public string Origin
@@ -41,9 +43,20 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
                 OnPropertyChanged(() => Destination);
             }
         }
+
+        private ObservableCollection<WaypointModel> _waypoints;
+
+        public ObservableCollection<WaypointModel> Waypoints
+        {
+            get { return _waypoints; }
+            set
+            {
+                SetProperty(ref _waypoints, value);
+                OnPropertyChanged(() => Waypoints);
+            }
+        }
+
         #endregion
-
-
 
         #region ctor
         /// <summary>
@@ -63,6 +76,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
             model._origin = flightPlan.Origin;
             model._destination = flightPlan.Destination;
             
+            if (flightPlan.Waipoints != null)
+            {
+                var waypoints = flightPlan.Waipoints.Select(wp => WaypointModel.FromCoreWaypoint(wp));
+                model._waypoints = new ObservableCollection<WaypointModel>(waypoints);
+            }
 
             return model;
         }

@@ -65,4 +65,8 @@
         <Setter Property="FontSize" Value="22" />
         <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
     </Style>
+
+    <Style x:Key="TextLarger" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="15" />
+    </Style>
 </ResourceDictionary>

@@ -12,19 +12,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
     /// </summary>
     public class WaypointModel : BindableBase 
     {
-        #region Bindable properties
+        #region Private fields
         private Core.Waypoint _waypoint;
+        #endregion
 
-        public Core.Waypoint Waypoint
-        {
-            get { return _waypoint; }
-            set
-            {
-                SetProperty(ref _waypoint, value);
-                OnPropertyChanged(() => Waypoint);
-            }
-        }
-
+        #region Bindable properties
         private double _latitude;
 
         public double Latitude
