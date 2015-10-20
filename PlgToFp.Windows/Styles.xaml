@@ -53,4 +53,16 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ErrorTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="{DynamicResource ValidationSummaryColor2}" />
+        <Setter Property="Background" Value="{DynamicResource ValidationSummaryFillColor2}" />
+    </Style>
+
+    <Style x:Key="HeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+    </Style>
 </ResourceDictionary>
