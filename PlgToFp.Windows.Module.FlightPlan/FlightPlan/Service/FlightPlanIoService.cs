@@ -10,8 +10,9 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
 {
     /// <summary>
     /// Service for importing/exporting flight plans
@@ -78,11 +79,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
             catch (Exception ex)
             {
-                RaiseFlightPlanParseExceptionEvent(task.Exception);
+                RaiseFlightPlanParseExceptionEvent(ex);
             }
         }
 
-        private void RaiseFlightPlanParseExceptionEvent(AggregateException exception)
+        private void RaiseFlightPlanParseExceptionEvent(Exception exception)
         {
             var message = string.Format("Exception in OnReqPlanGOpen:\n{0}", exception.ToString());
             _logger.Log(message, Category.Exception, Priority.Medium);

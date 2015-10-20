@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
 {
     /// <summary>
     /// Service for importing/exporting flight plans

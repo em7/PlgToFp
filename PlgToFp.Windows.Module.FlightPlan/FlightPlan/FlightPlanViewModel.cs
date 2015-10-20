@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
 using System.IO;
 using System.Xml;
 using PlgToFp.Core;

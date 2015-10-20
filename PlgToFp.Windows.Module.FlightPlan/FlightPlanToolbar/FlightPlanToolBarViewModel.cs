@@ -35,7 +35,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
 
         private void InitializeCommands()
         {
-            OpenPlanGCommand = new DelegateCommand(async () => OpenPlanG());
+            OpenPlanGCommand = new DelegateCommand(OpenPlanG);
             ExportIfmsCommand = new DelegateCommand(ExportIfms);
         }
         #endregion
@@ -46,14 +46,20 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
 
         }
 
-        private async Task OpenPlanG()
+        private void OpenPlanG()
         {
-            var path = await _interactionService.ShowOpenFileDialogAsync();
-            if (string.IsNullOrWhiteSpace(path))
-                return;
+            var task = _interactionService.ShowOpenFileDialogAsync();
+            task.ContinueWith(t =>
+            {
+                var path = t.Result;
+                if (string.IsNullOrWhiteSpace(path))
+                    return;
 
-            var evtPayload = new FlightPlanReqPlanGOpenEventPayload() { Path = path };
-            _evtAggregator.GetEvent<FlightPlanReqPlanGOpenEvent>().Publish(evtPayload);
+                var evtPayload = new FlightPlanReqPlanGOpenEventPayload() { Path = path };
+                _evtAggregator.GetEvent<FlightPlanReqPlanGOpenEvent>().Publish(evtPayload);
+            },
+            TaskScheduler.FromCurrentSynchronizationContext());
+            
         } 
         #endregion
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using PlgToFp.Core;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
 {
     /// <summary>
     /// A bindable representation of the FlightPlan data
