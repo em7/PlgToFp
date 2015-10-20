@@ -44,10 +44,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
                 throw new ArgumentNullException("path");
 
             var flightPlan = ParsePlanGFlightPlan(path);
-            var builder = new FlightPlanModelBuilder();
-            builder.ForFlightPlan(flightPlan);
+            var flightPlanModel = FlightPlanModel.FromCoreFlightPlan(flightPlan);
 
-            return builder.Build();
+            return flightPlanModel;
         }
 
         /// <summary>
@@ -72,9 +71,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
 
             try
             {
-                var builder = new FlightPlanModelBuilder();
-                builder.ForFlightPlan(task.Result);
-                var fplModel = builder.Build();
+                var fplModel = FlightPlanModel.FromCoreFlightPlan(task.Result);
                 RaiseFlightPlanParseOkEvent(fplModel);
             }
             catch (Exception ex)
@@ -110,14 +107,6 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
             var parser = new Core.PlgParser();
             var flightPlan = parser.ParsePlg(plgDoc);
             return flightPlan;
-        }
-
-        private FlightPlanModel BuildFlightPlanModel(Core.FlightPlan flightPlan)
-        {
-            var builder = new FlightPlanModelBuilder();
-            builder.ForFlightPlan(flightPlan);
-            var fplModel = builder.Build();
-            return fplModel;
         }
 
     }

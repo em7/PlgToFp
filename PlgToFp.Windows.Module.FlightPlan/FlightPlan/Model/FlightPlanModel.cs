@@ -55,6 +55,17 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
         }
         #endregion
 
+        #region Public methods
+        public static FlightPlanModel FromCoreFlightPlan(Core.FlightPlan flightPlan)
+        {
+            var model = new FlightPlanModel();
+            model._flightPlan = flightPlan;
+            model._origin = flightPlan.Origin;
+            model._destination = flightPlan.Destination;
+            
 
+            return model;
+        }
+        #endregion
     }
 }

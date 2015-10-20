@@ -95,9 +95,9 @@
       <DependentUpon>FlightPlanToolBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
+    <Compile Include="FlightPlan\Model\WaypointModel.cs" />
     <Compile Include="FlightPlan\Service\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\Model\FlightPlanModel.cs" />
-    <Compile Include="FlightPlan\Model\FlightPlanModelBuilder.cs" />
     <Compile Include="FlightPlan\Event\FlightPlanOpenErrorEvent.cs" />
     <Compile Include="FlightPlan\Event\FlightPlanOpenErrorEventPayload.cs" />
     <Compile Include="FlightPlan\Event\FlightPlanReqPlanGOpenEvent.cs" />
