@@ -13,7 +13,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters
     /// to a FMC format
     /// </summary>
     [ValueConversion(typeof(double), typeof(string))]
-    public class CoordsLatNumToFmcConverter : IValueConverter
+    public class CoordsLonNumToFmcConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -25,16 +25,16 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters
 
             if (num < 0)
             {
-                sb.Append("S");
+                sb.Append("W");
                 num *= -1;
             }
             else
             {
-                sb.Append("N");
+                sb.Append("E");
             }
 
             int wholePart = (int)num;
-            sb.Append(wholePart.ToString("00") + "°");
+            sb.Append(wholePart.ToString("000") + "°");
 
             double minsSecs = (num - wholePart) * 60;
 

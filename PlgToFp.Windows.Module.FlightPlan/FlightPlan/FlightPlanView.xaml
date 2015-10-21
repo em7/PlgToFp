@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <infraConverters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisCollapsedConverter" />
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
+        <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
     </UserControl.Resources>
     <Grid>
         <!--Main Content-->
@@ -66,7 +67,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Latitude, Converter={StaticResource LatCoordsConverter}}" />
                                 <TextBlock Text=" " />
-                                <TextBlock Text="{Binding Longitude}" />
+                                <TextBlock Text="{Binding Longitude, Converter={StaticResource LonCoordsConverter}}" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

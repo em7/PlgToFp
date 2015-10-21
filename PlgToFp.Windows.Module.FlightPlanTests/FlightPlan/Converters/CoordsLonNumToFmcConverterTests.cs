@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
 {
     [TestClass()]
-    public class CoordsLatNumToFmcConverterTests
+    public class CoordsLonNumToFmcConverterTests
     {
-        private readonly CoordsLatNumToFmcConverter _converter;
+        private readonly CoordsLonNumToFmcConverter _converter;
 
-        public CoordsLatNumToFmcConverterTests()
+        public CoordsLonNumToFmcConverterTests()
         {
-            _converter = new CoordsLatNumToFmcConverter();
+            _converter = new CoordsLonNumToFmcConverter();
         }
 
         #region Positive coords
@@ -30,13 +30,23 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
         }
 
         [TestMethod()]
+        public void ConvertPositiveCoordWholeDegreeLargeTest()
+        {
+            double value = 125.0;
+            var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
+            Assert.AreEqual("E125°00.0", result, "+125.00 should be converted to E125°00.0");
+        }
+
+        [TestMethod()]
         public void ConvertPositiveCoordWholeDegreeTest()
         {
             double value = 25.0;
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N25°00.0", result, "+25.00 should be converted to N25°00.0");
+            Assert.AreEqual("E025°00.0", result, "+025.00 should be converted to E025°00.0");
         }
 
         [TestMethod()]
@@ -46,7 +56,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N05°00.0", result, "+05.00 should be converted to N05°00.0");
+            Assert.AreEqual("E005°00.0", result, "+005.00 should be converted to E005°00.0");
         }
 
         [TestMethod()]
@@ -56,7 +66,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N25°15.0", result, "+25.25 should be converted to N25°15.0");
+            Assert.AreEqual("E025°15.0", result, "+025.25 should be converted to E025°15.0");
         }
 
         [TestMethod()]
@@ -66,7 +76,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N25°06.0", result, "+25.1 should be converted to N25°06.0");
+            Assert.AreEqual("E025°06.0", result, "+025.1 should be converted to E025°06.0");
         }
 
         [TestMethod()]
@@ -76,7 +86,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N25°15.6", result, "+25.26 should be converted to N25°15.6");
+            Assert.AreEqual("E025°15.6", result, "+025.26 should be converted to E025°15.6");
         }
 
         [TestMethod()]
@@ -86,7 +96,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N00°15.0", result, "+00.25 should be converted to N00°15.0");
+            Assert.AreEqual("E000°15.0", result, "+000.25 should be converted to E000°15.0");
         }
 
         [TestMethod()]
@@ -96,7 +106,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N00°00.6", result, "+00.01 should be converted to N00°00.6");
+            Assert.AreEqual("E000°00.6", result, "+000.01 should be converted to E000°00.6");
         }
         #endregion
 
@@ -108,7 +118,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S25°00.0", result, "-25.00 should be converted to S25°00.0");
+            Assert.AreEqual("W025°00.0", result, "-025.00 should be converted to W025°00.0");
         }
 
         [TestMethod()]
@@ -118,7 +128,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S05°00.0", result, "-05.00 should be converted to S05°00.0");
+            Assert.AreEqual("W005°00.0", result, "-005.00 should be converted to W005°00.0");
         }
 
         [TestMethod()]
@@ -128,7 +138,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S25°15.0", result, "-25.25 should be converted to S25°15.0");
+            Assert.AreEqual("W025°15.0", result, "-025.25 should be converted to W025°15.0");
         }
 
         [TestMethod()]
@@ -138,7 +148,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S25°06.0", result, "-25.1 should be converted to S25°06.0");
+            Assert.AreEqual("W025°06.0", result, "-025.1 should be converted to W025°06.0");
         }
 
         [TestMethod()]
@@ -148,7 +158,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S25°15.6", result, "-25.26 should be converted to S25°15.6");
+            Assert.AreEqual("W025°15.6", result, "-025.26 should be converted to W025°15.6");
         }
 
         [TestMethod()]
@@ -158,7 +168,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S00°15.0", result, "-00.25 should be converted to S00°15.0");
+            Assert.AreEqual("W000°15.0", result, "-000.25 should be converted to W000°15.0");
         }
 
         [TestMethod()]
@@ -168,7 +178,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S00°00.6", result, "-00.01 should be converted to S00°00.6");
+            Assert.AreEqual("W000°00.6", result, "-000.01 should be converted to W000°00.6");
         }
         #endregion
 
