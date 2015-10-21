@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
+             xmlns:converters="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters"
              xmlns:infraConverters="clr-namespace:PlgToFp.Windows.Infrastructure.Converters;assembly=PlgToFp.Windows.Infrastructure"
              xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
              mc:Ignorable="d" 
@@ -11,6 +12,7 @@
              d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
     <UserControl.Resources>
         <infraConverters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisCollapsedConverter" />
+        <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
     </UserControl.Resources>
     <Grid>
         <!--Main Content-->
@@ -62,7 +64,7 @@
                             <TextBlock Text="{Binding Path=Identifier}"
                                        Style="{StaticResource TextLarger}"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Latitude}" />
+                                <TextBlock Text="{Binding Latitude, Converter={StaticResource LatCoordsConverter}}" />
                                 <TextBlock Text=" " />
                                 <TextBlock Text="{Binding Longitude}" />
                             </StackPanel>

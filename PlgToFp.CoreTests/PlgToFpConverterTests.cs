@@ -12,15 +12,15 @@ namespace PlgToFp.Core.Tests
     [TestClass()]
     public class PlgToFpConverterTests
     {
-        [TestMethod()]
-        public void ConvertLkmtLktbTest()
-        {
-            var plg = XDocument.Load(@"./plg/lkmtlktb.plg");
-            var fp = XDocument.Load(@"./fp/lkmtlktb.fp"); ;
-            var converter = new PlgToFpConverter();
-            var fpConverted = converter.Convert(plg);
-            Assert.IsNotNull(fpConverted, "The converted flight plan should not be null");
-            Assert.IsTrue(XNode.DeepEquals(fpConverted.FirstNode, fp.FirstNode), "The converted flight plan should be correct");
-        }
+        //[TestMethod()]
+        //public void ConvertLkmtLktbTest()
+        //{
+        //    var plg = XDocument.Load(@"./plg/lkmtlktb.plg");
+        //    var fp = XDocument.Load(@"./fp/lkmtlktb.fp"); ;
+        //    var converter = new PlgToFpConverter();
+        //    var fpConverted = converter.Convert(plg);
+        //    Assert.IsNotNull(fpConverted, "The converted flight plan should not be null");
+        //    Assert.IsTrue(XNode.DeepEquals(fpConverted.FirstNode, fp.FirstNode), "The converted flight plan should be correct");
+        //}
     }
 }
