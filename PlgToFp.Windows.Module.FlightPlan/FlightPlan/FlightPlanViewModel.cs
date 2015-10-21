@@ -96,6 +96,38 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         #endregion
 
+        #region Public functions
+        /// <summary>
+        /// Moves a waypoint before another one or to the end of the waypoints list if
+        /// before parameter is null
+        /// </summary>
+        /// <param name="waypointToMove">waypoint to be moved</param>
+        /// <param name="before">before which waypoint the new one should be moved or null if the new should be moved to the end</param>
+        public void RearrangeWaypoints(object waypointToMove, object before)
+        {
+            if (FlightPlan == null)
+                return;
+
+            var wpToMove = waypointToMove as WaypointModel;
+            var wpBefore = before as WaypointModel;
+
+            if (before != null)
+            {
+                var idx = FlightPlan.Waypoints.IndexOf(wpBefore);
+                if (idx >= 0)
+                {
+                    FlightPlan.Waypoints.Remove(wpToMove);
+                    FlightPlan.Waypoints.Insert(idx, wpToMove);
+                }
+                else
+                {
+                    FlightPlan.Waypoints.Remove(wpToMove);
+                    FlightPlan.Waypoints.Add(wpToMove);
+                }
+            }
+        }
+        #endregion
+
         #region private functions
         /// <summary>
         /// Checks the exceptions which can occur during opening the flight plan and

@@ -9,7 +9,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         BorderThickness="1"
-                      GlowBrush="{DynamicResource AccentColorBrush}"
+        GlowBrush="{DynamicResource AccentColorBrush}"
         Title="PlgToFp" Height="550" Width="700">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>

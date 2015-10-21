@@ -4,17 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
-             xmlns:converters="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters"
-             xmlns:infraConverters="clr-namespace:PlgToFp.Windows.Infrastructure.Converters;assembly=PlgToFp.Windows.Infrastructure"
              xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
-    <UserControl.Resources>
-        <infraConverters:BoolToVisibilityCollapsedConverter x:Key="BoolToVisCollapsedConverter" />
-        <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
-        <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
-    </UserControl.Resources>
     <Grid>
         <!--Main Content-->
         <Grid Margin="4">
@@ -55,24 +48,7 @@
                            Style="{StaticResource HeaderTextBlockStyle}"/>
             </StackPanel>
 
-            <ListView Grid.Row="1"
-                      Margin="0,4,0,4"
-                      ItemsSource="{Binding Path=FlightPlan.Waypoints}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                    Margin="0,0,0,3">
-                            <TextBlock Text="{Binding Path=Identifier}"
-                                       Style="{StaticResource TextLarger}"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Latitude, Converter={StaticResource LatCoordsConverter}}" />
-                                <TextBlock Text=" " />
-                                <TextBlock Text="{Binding Longitude, Converter={StaticResource LonCoordsConverter}}" />
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <local:PlanPointsView Grid.Row="1" Margin="0,4,0,4" />
         </Grid>
         
         <!-- error message -->
