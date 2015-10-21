@@ -86,7 +86,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N0015.0", result, "+0.25 should be converted to N0015.0");
+            Assert.AreEqual("N0015.0", result, "+00.25 should be converted to N0015.0");
         }
 
         [TestMethod()]
@@ -96,7 +96,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("N0000.6", result, "+0.01 should be converted to N0000.6");
+            Assert.AreEqual("N0000.6", result, "+00.01 should be converted to N0000.6");
         }
         #endregion
 
@@ -158,7 +158,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S0015.0", result, "-0.25 should be converted to S0015.0");
+            Assert.AreEqual("S0015.0", result, "-00.25 should be converted to S0015.0");
         }
 
         [TestMethod()]
@@ -168,7 +168,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
             var result = _converter.Convert(value, typeof(string), null, CultureInfo.InvariantCulture);
 
             Assert.IsInstanceOfType(result, typeof(string), "The converted value should be type of string");
-            Assert.AreEqual("S0000.6", result, "-0.01 should be converted to S0000.6");
+            Assert.AreEqual("S0000.6", result, "-00.01 should be converted to S0000.6");
         }
         #endregion
 
