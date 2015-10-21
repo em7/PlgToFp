@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         BorderThickness="1"
                       GlowBrush="{DynamicResource AccentColorBrush}"
-        Title="PlgToFp" Height="350" Width="525">
+        Title="PlgToFp" Height="550" Width="700">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <ItemsControl prism:RegionManager.RegionName="{x:Static infra:Regions.RightWindowCommands}" />
@@ -22,13 +22,13 @@
                       Background="{DynamicResource GrayBrush10}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="4">
+                    <StackPanel Orientation="Horizontal" Margin="3,0,4,0">
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <ContentControl prism:RegionManager.RegionName="{x:Static infra:Regions.Main}" />
+        <ContentControl prism:RegionManager.RegionName="{x:Static infra:Regions.Main}" Margin="3,0,4,0" />
     </DockPanel>
     
 </controls:MetroWindow>
