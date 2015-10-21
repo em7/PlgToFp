@@ -95,8 +95,8 @@
       <DependentUpon>FlightPlanToolBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
-    <Compile Include="FlightPlan\Converters\CoordsLonNumToFmcConverter.cs" />
-    <Compile Include="FlightPlan\Converters\CoordsLatNumToFmcConverter.cs" />
+    <Compile Include="FlightPlan\Converter\CoordsLonNumToFmcConverter.cs" />
+    <Compile Include="FlightPlan\Converter\CoordsLatNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\DragAdorner.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
     <Compile Include="FlightPlan\PlanPointsView.xaml.cs">

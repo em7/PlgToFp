@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter
 {
     /// <summary>
     /// Converts a double value of coordinates latitude from decimal number
     /// to a FMC format
     /// </summary>
     [ValueConversion(typeof(double), typeof(string))]
-    public class CoordsLonNumToFmcConverter : IValueConverter
+    public class CoordsLatNumToFmcConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -25,16 +25,16 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters
 
             if (num < 0)
             {
-                sb.Append("W");
+                sb.Append("S");
                 num *= -1;
             }
             else
             {
-                sb.Append("E");
+                sb.Append("N");
             }
 
             int wholePart = (int)num;
-            sb.Append(wholePart.ToString("000") + "°");
+            sb.Append(wholePart.ToString("00") + "°");
 
             double minsSecs = (num - wholePart) * 60;
 
