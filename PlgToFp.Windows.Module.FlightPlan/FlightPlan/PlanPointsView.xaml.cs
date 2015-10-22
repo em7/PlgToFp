@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -89,7 +90,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             {
                 var droppedItem = e.Data.GetData(WAYPOINT_DATA_FORMAT);
                 var itemDroppedOn = FindAnchestor<ListViewItem>((DependencyObject)e.OriginalSource);
-                var viewmodel = (FlightPlanViewModel)this.DataContext;
+                var viewmodel = ((PlanPointsViewModel)this.DataContext).ParentFlightPlan;
 
                 if (itemDroppedOn != null)
                 {
@@ -173,8 +174,15 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
 
 
+
         #endregion
 
-        
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
+
+            dialog = dialog.ShowModalDialogExternally();
+            await dialog.RequestCloseAsync();
+        }
     }
 }

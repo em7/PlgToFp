@@ -5,15 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
              xmlns:converters="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
+             d:DataContext="{d:DesignInstance local:PlanPointsViewModel}">
     <UserControl.Resources>
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
         <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
+
+        <Dialog:CustomDialog x:Key="CustomDialogTest"
+                                 Title="This dialog allows arbitrary content."
+                                 x:Name="CustomTestDialog">
+            <TextBlock Height="200" x:Name="MessageTextBlock" Text="HelloWorld" Foreground="{DynamicResource AccentColorBrush}" />
+        </Dialog:CustomDialog>
     </UserControl.Resources>
 
-    <ListView ItemsSource="{Binding Path=FlightPlan.Waypoints}"
+    <ListView ItemsSource="{Binding Path=ParentFlightPlan.FlightPlan.Waypoints}"
               AllowDrop="True"
               
               DragEnter="ListViewDragEnter"
@@ -27,6 +34,7 @@
                     <Rectangle Width="20"
                                Height="20"
                                Margin="4,0"
+                               VerticalAlignment="Center"
                                Fill="{DynamicResource TextBrush}"
                                PreviewMouseLeftButtonDown="MoveHandlePreviewMouseLeftButtonDown"
                                PreviewMouseMove="MoveHandlePreviewMouseMove">
@@ -46,7 +54,8 @@
 
                     <!-- Ident, Coords -->
                     <StackPanel Orientation="Vertical"
-                            Margin="0,0,0,3">
+                                VerticalAlignment="Center"
+                                Margin="4,0">
                         <TextBlock Text="{Binding Path=Identifier}"
                                Style="{StaticResource TextLarger}"/>
                         <StackPanel Orientation="Horizontal">
@@ -55,6 +64,22 @@
                             <TextBlock Text="{Binding Longitude, Converter={StaticResource LonCoordsConverter}}" />
                         </StackPanel>
                     </StackPanel>
+
+                    <!-- edit button -->
+                    <Button Width="40"
+                            Height="40"
+                            Margin="4,0"
+                            Style="{DynamicResource MetroCircleButtonStyle}"
+                            Click="Button_Click">
+                        <Rectangle Width="16"
+                                   Height="16"
+                                   Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_edit}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
 
                 </StackPanel>
                 

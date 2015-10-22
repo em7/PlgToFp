@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter;
+
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
 {
     [TestClass()]

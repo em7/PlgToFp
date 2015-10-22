@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:PlgToFp.Windows"
         xmlns:infra="clr-namespace:PlgToFp.Windows.Infrastructure;assembly=PlgToFp.Windows.Infrastructure"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
@@ -16,6 +17,7 @@
             <ItemsControl prism:RegionManager.RegionName="{x:Static infra:Regions.RightWindowCommands}" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
+    
     <DockPanel>
         <ItemsControl DockPanel.Dock="Top"
                       prism:RegionManager.RegionName="{x:Static infra:Regions.Toolbar}"

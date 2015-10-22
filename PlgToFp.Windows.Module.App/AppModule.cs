@@ -28,6 +28,7 @@ namespace PlgToFp.Windows.Module.App
             _regionManager.RegisterViewWithRegion(Regions.RightWindowCommands, typeof(AppToolbar.AppRightMenuView));
 
             _container.RegisterType(typeof(IInteractionService), typeof(InteractionService));
+            _container.RegisterInstance<IInteractionService>(_container.Resolve<IInteractionService>());
         }
     }
 }

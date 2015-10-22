@@ -102,6 +102,7 @@
     <Compile Include="FlightPlan\PlanPointsView.xaml.cs">
       <DependentUpon>PlanPointsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightPlan\PlanPointsViewModel.cs" />
     <Compile Include="FlightPlan\Service\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\Model\FlightPlanModel.cs" />
     <Compile Include="FlightPlan\Event\FlightPlanOpenErrorEvent.cs" />
