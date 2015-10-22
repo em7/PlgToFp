@@ -33,12 +33,12 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         private bool _dragIsOutOfScope;
         private static readonly string WAYPOINT_DATA_FORMAT = "WaypointListViewItem";
 
-        private void ListViewPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void MoveHandlePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _startPoint = e.GetPosition(WaypointsListView);
         }
 
-        private void ListViewPreviewMouseMove(object sender, MouseEventArgs e)
+        private void MoveHandlePreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -170,6 +170,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             while (current != null);
             return null;
         }
+
 
 
         #endregion

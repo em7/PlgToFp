@@ -15,24 +15,49 @@
 
     <ListView ItemsSource="{Binding Path=FlightPlan.Waypoints}"
               AllowDrop="True"
-              PreviewMouseLeftButtonDown="ListViewPreviewMouseLeftButtonDown"
-              PreviewMouseMove="ListViewPreviewMouseMove"
+              
               DragEnter="ListViewDragEnter"
               Drop="ListViewDrop"
               x:Name="WaypointsListView"
               >
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Vertical"
+                <StackPanel Orientation="Horizontal">
+                    <!-- Move -->
+                    <Rectangle Width="20"
+                               Height="20"
+                               Margin="4,0"
+                               Fill="{DynamicResource TextBrush}"
+                               PreviewMouseLeftButtonDown="MoveHandlePreviewMouseLeftButtonDown"
+                               PreviewMouseMove="MoveHandlePreviewMouseMove">
+                        <Rectangle.Style>
+                            <Style TargetType="Rectangle">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="SizeAll" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_arrow_up_down}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+
+                    <!-- Ident, Coords -->
+                    <StackPanel Orientation="Vertical"
                             Margin="0,0,0,3">
-                    <TextBlock Text="{Binding Path=Identifier}"
+                        <TextBlock Text="{Binding Path=Identifier}"
                                Style="{StaticResource TextLarger}"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Latitude, Converter={StaticResource LatCoordsConverter}}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Longitude, Converter={StaticResource LonCoordsConverter}}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Latitude, Converter={StaticResource LatCoordsConverter}}" />
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Longitude, Converter={StaticResource LonCoordsConverter}}" />
+                        </StackPanel>
                     </StackPanel>
+
                 </StackPanel>
+                
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
