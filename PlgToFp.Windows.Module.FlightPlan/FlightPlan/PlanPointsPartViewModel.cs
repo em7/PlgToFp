@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
-    public class PlanPointsViewModel : BindableBase
+    public class PlanPointsPartViewModel : BindableBase
     {
         private IEventAggregator _evtAggregator;
 
@@ -25,7 +25,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
 
 
-        public PlanPointsViewModel(IEventAggregator evtAggregator)
+        public PlanPointsPartViewModel(IEventAggregator evtAggregator)
         {
             _evtAggregator = evtAggregator;
             _editCommand = new DelegateCommand<object>(HandleEditCmd);

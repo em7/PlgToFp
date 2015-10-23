@@ -20,12 +20,21 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
     /// <summary>
     /// Interaction logic for PlanPointsView.xaml
     /// </summary>
-    public partial class PlanPointsView : UserControl
+    public partial class PlanPointsPartView : UserControl
     {
-        public PlanPointsView()
+        public PlanPointsPartView()
         {
+            this.DataContextChanged += PlanPointsPartView_DataContextChanged;
             InitializeComponent();
         }
+
+        private void PlanPointsPartView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var dialog = (BaseMetroDialog) Resources["CustomCloseDialogTest"];
+            dialog.DataContext = DataContext;
+        }
+
+
 
         #region Waypoint drag and drop
         private Point _startPoint;
@@ -90,7 +99,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             {
                 var droppedItem = e.Data.GetData(WAYPOINT_DATA_FORMAT);
                 var itemDroppedOn = FindAnchestor<ListViewItem>((DependencyObject)e.OriginalSource);
-                var viewmodel = ((PlanPointsViewModel)this.DataContext).ParentFlightPlan;
+                var viewmodel = ((PlanPointsPartViewModel)this.DataContext).ParentFlightPlan;
 
                 if (itemDroppedOn != null)
                 {

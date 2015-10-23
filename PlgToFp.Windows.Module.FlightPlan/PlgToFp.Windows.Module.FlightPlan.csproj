@@ -99,10 +99,10 @@
     <Compile Include="FlightPlan\Converter\CoordsLatNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\DragAdorner.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
-    <Compile Include="FlightPlan\PlanPointsView.xaml.cs">
-      <DependentUpon>PlanPointsView.xaml</DependentUpon>
+    <Compile Include="FlightPlan\PlanPointsPartView.xaml.cs">
+      <DependentUpon>PlanPointsPartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FlightPlan\PlanPointsViewModel.cs" />
+    <Compile Include="FlightPlan\PlanPointsPartViewModel.cs" />
     <Compile Include="FlightPlan\Service\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\Model\FlightPlanModel.cs" />
     <Compile Include="FlightPlan\Event\FlightPlanOpenErrorEvent.cs" />
@@ -161,7 +161,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FlightPlan\PlanPointsView.xaml">
+    <Page Include="FlightPlan\PlanPointsPartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,7 +24,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         #region ctor
 
-        public FlightPlanViewModel(IEventAggregator evtAggregator, PlanPointsViewModel planPointsVm)
+        public FlightPlanViewModel(IEventAggregator evtAggregator, PlanPointsPartViewModel planPointsVm)
         {
             _evtAggregator = evtAggregator;
             _planPointsViewModel = planPointsVm;
@@ -71,9 +71,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
         }
 
-        private PlanPointsViewModel _planPointsViewModel;
+        private PlanPointsPartViewModel _planPointsViewModel;
 
-        public PlanPointsViewModel PlanPointsViewModel
+        public PlanPointsPartViewModel PlanPointsViewModel
         {
             get { return _planPointsViewModel; }
             set

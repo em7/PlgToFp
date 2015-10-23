@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlgToFp.Windows.Module.FlightPlan.FlightPlan.PlanPointsView"
+﻿<UserControl x:Class="PlgToFp.Windows.Module.FlightPlan.FlightPlan.PlanPointsPartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,16 +10,14 @@
              mc:Ignorable="d" 
              x:Name="PointsPlanView"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:PlanPointsViewModel}">
+             d:DataContext="{d:DesignInstance local:PlanPointsPartViewModel}">
     <UserControl.Resources>
-        <helpers:Proxy x:Key="DataContextProxy" Data="{Binding}" />
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
         <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
 
         <Dialog:CustomDialog x:Key="CustomCloseDialogTest"
                                  Title="Custom Dialog which is awaitable"
-                                 x:Name="CustomCloseDialogTest"
-                             DataContext="{StaticResource DataContextProxy}">
+                                 x:Name="CustomCloseDialogTest">
 
             <StackPanel>
                 <TextBlock Height="30" Text="This dialog allows arbitrary content. You have to close it yourself by clicking the close button below." 
@@ -41,7 +39,12 @@
               >
         <ListView.ItemTemplate>
             <DataTemplate>
+                
                 <StackPanel Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        
+                    </StackPanel.Resources>
+                    
                     <!-- Move -->
                     <Rectangle Width="20"
                                Height="20"

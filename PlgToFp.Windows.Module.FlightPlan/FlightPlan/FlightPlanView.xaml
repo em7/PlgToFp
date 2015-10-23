@@ -48,7 +48,7 @@
                            Style="{StaticResource HeaderTextBlockStyle}"/>
             </StackPanel>
 
-            <local:PlanPointsView Grid.Row="1" Margin="0,4,0,4"
+            <local:PlanPointsPartView Grid.Row="1" Margin="0,4,0,4"
                                   DataContext="{Binding Path=PlanPointsViewModel}"/>
         </Grid>
         
