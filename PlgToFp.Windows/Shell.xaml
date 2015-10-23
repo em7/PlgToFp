@@ -12,6 +12,11 @@
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
         Title="PlgToFp" Height="550" Width="700">
+
+    <controls:MetroWindow.Resources>
+        
+    </controls:MetroWindow.Resources>
+
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <ItemsControl prism:RegionManager.RegionName="{x:Static infra:Regions.RightWindowCommands}" />

@@ -1,4 +1,8 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using PlgToFp.Windows.Infrastructure;
+using PlgToFp.Windows.Infrastructure.Interaction.Event;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +25,44 @@ namespace PlgToFp.Windows
     /// </summary>
     public partial class Shell : MetroWindow
     {
-        public Shell()
+        private IEventAggregator _evtAggregator;
+        public Shell(IEventAggregator evtAggregator)
         {
+            _evtAggregator = evtAggregator;
+            RegisterEvents();
             InitializeComponent();
+        }
+
+        private void RegisterEvents()
+        {
+            _evtAggregator.GetEvent<ShowDialogEvent>().Subscribe(async payload =>
+            {
+                await ShowDialogAsync(payload);
+            });
+
+            _evtAggregator.GetEvent<CloseDialogEvent>().Subscribe(async payload =>
+            {
+                await CloseDialogAsync(payload);
+            });
+        }
+
+        private async Task ShowDialogAsync(ShowDialogEventPayload payload)
+        {
+            if (payload == null 
+                || payload.DialogContent == null
+                || (! (payload.DialogContent is BaseMetroDialog)))
+                return;
+            await this.ShowMetroDialogAsync((BaseMetroDialog)payload.DialogContent);
+        }
+
+        private async Task CloseDialogAsync(CloseDialogEventPayload payload)
+        {
+            if (payload == null
+                || payload.DialogContent == null
+                || (!(payload.DialogContent is BaseMetroDialog)))
+                return;
+
+            await this.HideMetroDialogAsync((BaseMetroDialog)payload.DialogContent);
         }
     }
 }

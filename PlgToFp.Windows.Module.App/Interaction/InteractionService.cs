@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PlgToFp.Windows.Infrastructure.Interaction;
 
-namespace PlgToFp.Windows.Infrastructure
+namespace PlgToFp.Windows.Module.App.Interaction
 {
     /// <summary>
     /// A service providing the user interaction

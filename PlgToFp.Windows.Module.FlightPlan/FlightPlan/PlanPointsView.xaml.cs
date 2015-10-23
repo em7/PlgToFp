@@ -172,17 +172,6 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             return null;
         }
 
-
-
-
         #endregion
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
-
-            dialog = dialog.ShowModalDialogExternally();
-            await dialog.RequestCloseAsync();
-        }
     }
 }

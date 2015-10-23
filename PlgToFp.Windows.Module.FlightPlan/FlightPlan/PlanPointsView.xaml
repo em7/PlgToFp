@@ -6,17 +6,29 @@
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
              xmlns:converters="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter"
              xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:helpers="clr-namespace:PlgToFp.Windows.Infrastructure.Helpers;assembly=PlgToFp.Windows.Infrastructure"
              mc:Ignorable="d" 
+             x:Name="PointsPlanView"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:PlanPointsViewModel}">
     <UserControl.Resources>
+        <helpers:Proxy x:Key="DataContextProxy" Data="{Binding}" />
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
         <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
 
-        <Dialog:CustomDialog x:Key="CustomDialogTest"
-                                 Title="This dialog allows arbitrary content."
-                                 x:Name="CustomTestDialog">
-            <TextBlock Height="200" x:Name="MessageTextBlock" Text="HelloWorld" Foreground="{DynamicResource AccentColorBrush}" />
+        <Dialog:CustomDialog x:Key="CustomCloseDialogTest"
+                                 Title="Custom Dialog which is awaitable"
+                                 x:Name="CustomCloseDialogTest"
+                             DataContext="{StaticResource DataContextProxy}">
+
+            <StackPanel>
+                <TextBlock Height="30" Text="This dialog allows arbitrary content. You have to close it yourself by clicking the close button below." 
+                               TextWrapping="Wrap"
+                               Foreground="{DynamicResource AccentColorBrush}" />
+                <Button Content="Close Me!"
+                        Command="{Binding CloseDialogCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Dialog:CustomDialog}}}"/>
+            </StackPanel>
         </Dialog:CustomDialog>
     </UserControl.Resources>
 
@@ -70,7 +82,8 @@
                             Height="40"
                             Margin="4,0"
                             Style="{DynamicResource MetroCircleButtonStyle}"
-                            Click="Button_Click">
+                            Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            CommandParameter="{StaticResource CustomCloseDialogTest}">
                         <Rectangle Width="16"
                                    Height="16"
                                    Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">

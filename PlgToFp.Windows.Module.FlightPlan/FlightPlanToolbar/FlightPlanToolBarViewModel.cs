@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Event;
+using PlgToFp.Windows.Infrastructure.Interaction;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
 {

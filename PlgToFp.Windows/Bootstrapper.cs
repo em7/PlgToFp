@@ -1,4 +1,6 @@
-﻿using Prism.Modularity;
+﻿using Microsoft.Practices.Unity;
+using PlgToFp.Windows.Infrastructure;
+using Prism.Modularity;
 using Prism.Unity;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,8 @@ namespace PlgToFp.Windows
     {
         protected override DependencyObject CreateShell()
         {
-            return new Shell();
+            //return new Shell();
+            return Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
@@ -32,6 +35,13 @@ namespace PlgToFp.Windows
             moduleCatalog.AddModule(typeof(Module.App.AppModule));
             moduleCatalog.AddModule(typeof(Module.FlightPlan.FlightPlanModule));
             
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            //RegisterTypeIfMissing(typeof(IDialogService), typeof(DialogService), true);
         }
     }
 }

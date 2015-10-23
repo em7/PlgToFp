@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PlgToFp.Windows.Infrastructure.Interaction;
+using PlgToFp.Windows.Module.App.Interaction;
 
 namespace PlgToFp.Windows.Module.App
 {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PlgToFp.Windows.Infrastructure
+namespace PlgToFp.Windows.Infrastructure.Interaction
 {
     /// <summary>
     /// A service providing the user interaction
