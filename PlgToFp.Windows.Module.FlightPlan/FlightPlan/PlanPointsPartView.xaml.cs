@@ -30,6 +30,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         private void PlanPointsPartView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            // TODO trigger?
             var dialog = (BaseMetroDialog) Resources["CustomCloseDialogTest"];
             dialog.DataContext = DataContext;
         }
