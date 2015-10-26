@@ -98,10 +98,12 @@
     <Compile Include="FlightPlan\Converter\CoordsLonNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\Converter\CoordsLatNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\DragAdorner.cs" />
+    <Compile Include="FlightPlan\FlightPlanViewModelDesign.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
     <Compile Include="FlightPlan\PlanPointsPartView.xaml.cs">
       <DependentUpon>PlanPointsPartView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightPlan\PlanPointsPartViewModelDesign.cs" />
     <Compile Include="FlightPlan\PlanPointsPartViewModel.cs" />
     <Compile Include="FlightPlan\Service\FlightPlanIoService.cs" />
     <Compile Include="FlightPlan\Model\FlightPlanModel.cs" />

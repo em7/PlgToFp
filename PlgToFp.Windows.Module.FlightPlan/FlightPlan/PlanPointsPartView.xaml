@@ -10,12 +10,18 @@
              mc:Ignorable="d" 
              x:Name="PointsPlanView"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:PlanPointsPartViewModel}">
+             >
+
+    <!--d:DataContext="{d:DesignInstance local:PlanPointsPartViewModel}"-->
+    <UserControl.DataContext>
+        <local:PlanPointsPartViewModelDesign  />
+    </UserControl.DataContext>
+    
     <UserControl.Resources>
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
         <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
 
-        <Dialog:CustomDialog x:Key="CustomCloseDialogTest"
+        <!--<Dialog:CustomDialog x:Key="CustomCloseDialogTest"
                                  Title="Custom Dialog which is awaitable"
                                  x:Name="CustomCloseDialogTest">
 
@@ -27,7 +33,7 @@
                         Command="{Binding CloseDialogCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Dialog:CustomDialog}}}"/>
             </StackPanel>
-        </Dialog:CustomDialog>
+        </Dialog:CustomDialog>-->
     </UserControl.Resources>
 
     <ListView ItemsSource="{Binding Path=ParentFlightPlan.FlightPlan.Waypoints}"
@@ -86,7 +92,8 @@
                             Margin="4,0"
                             Style="{DynamicResource MetroCircleButtonStyle}"
                             Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                            CommandParameter="{StaticResource CustomCloseDialogTest}">
+                            >
+                        <!--CommandParameter="{StaticResource CustomCloseDialogTest}"-->
                         <Rectangle Width="16"
                                    Height="16"
                                    Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">

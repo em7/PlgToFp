@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using PlgToFp.Core;
 using System.Collections.ObjectModel;
+using PlgToFp.Windows.Infrastructure.Helpers;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
 {
@@ -64,7 +65,16 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
         /// </summary>
         public FlightPlanModel()
         {
-
+            if (DesignHelper.IsInDesignMode())
+            {
+                Waypoints = new ObservableCollection<WaypointModel>(new List<WaypointModel>
+                {
+                    new WaypointModel() { Identifier = "ID1", Latitude = 6.66, Longitude = 12.89 },
+                    new WaypointModel() { Identifier = "ID2", Latitude = -6.66, Longitude = 12.89 },
+                    new WaypointModel() { Identifier = "ID3", Latitude = 6.66, Longitude = -12.89 },
+                    new WaypointModel() { Identifier = "ID4", Latitude = -6.66, Longitude = -12.89 },
+                });
+            }
         }
         #endregion
 

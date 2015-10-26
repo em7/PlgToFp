@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\BoolToVisibilityCollapsedConverter.cs" />
+    <Compile Include="Helpers\DesignHelper.cs" />
     <Compile Include="Helpers\Proxy.cs" />
     <Compile Include="Interaction\Event\CloseDialogEvent.cs" />
     <Compile Include="Interaction\Event\CloseDialogEventPayload.cs" />

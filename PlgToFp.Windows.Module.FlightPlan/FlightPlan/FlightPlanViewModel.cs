@@ -12,6 +12,7 @@ using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
 using System.IO;
 using System.Xml;
 using PlgToFp.Core;
+using PlgToFp.Windows.Infrastructure.Helpers;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
@@ -30,9 +31,20 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             _planPointsViewModel = planPointsVm;
             _planPointsViewModel.ParentFlightPlan = this;
 
-            _evtAggregator.GetEvent<FlightPlanReqPlanShowEvent>().Subscribe(OnReqPlanShow);
-            _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>().Subscribe(OnOpenPlanError);
+            var reqPlanShowEvt = _evtAggregator.GetEvent<FlightPlanReqPlanShowEvent>();
+            var openPlanErrEvt = _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>();
+
+            if (reqPlanShowEvt != null)
+                reqPlanShowEvt.Subscribe(OnReqPlanShow);
+
+            if (openPlanErrEvt != null)
+                openPlanErrEvt.Subscribe(OnOpenPlanError);
         }
+
+        /// <summary>
+        /// For Design-Time only
+        /// </summary>
+        protected FlightPlanViewModel() { }
         #endregion
 
         #region event handlers

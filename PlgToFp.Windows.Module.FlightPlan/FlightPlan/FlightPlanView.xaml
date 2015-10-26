@@ -7,7 +7,14 @@
              xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance local:FlightPlanViewModel}">
+             
+             >
+
+    <!--d:DataContext="{d:DesignInstance local:FlightPlanViewModel}"-->
+    <UserControl.DataContext>
+        <local:FlightPlanViewModelDesign />
+    </UserControl.DataContext>
+    
     <Grid>
         <!--Main Content-->
         <Grid Margin="4">
