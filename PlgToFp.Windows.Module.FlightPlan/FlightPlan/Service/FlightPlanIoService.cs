@@ -83,7 +83,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service
         private void RaiseFlightPlanParseExceptionEvent(Exception exception)
         {
             var message = string.Format("Exception in OnReqPlanGOpen:\n{0}", exception.ToString());
-            _logger.Log(message, Category.Exception, Priority.Medium);
+            _logger.Log(message, Category.Exception, Priority.High);
 
             var evtPayload = new FlightPlanOpenErrorEventPayload()
             {
