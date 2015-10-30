@@ -78,6 +78,7 @@ Global
 		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release.CLI|Any CPU.ActiveCfg = Release|Any CPU
 		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release.Windows|Any CPU.ActiveCfg = Release|Any CPU
 		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release.Windows|Any CPU.Build.0 = Release|Any CPU
+		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release.Windows|Any CPU.Deploy.0 = Release|Any CPU
 		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6861FE46-419D-4222-B14F-4672D61F31E0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C87DF78F-402A-4293-8E21-F51BB5BF8B4A}.Debug.CLI|Any CPU.ActiveCfg = Debug|Any CPU

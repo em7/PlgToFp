@@ -20,21 +20,20 @@
 
     <ListView ItemsSource="{Binding Path=ParentFlightPlan.FlightPlan.Waypoints}"
               AllowDrop="True"
-              
               DragEnter="ListViewDragEnter"
               Drop="ListViewDrop"
               x:Name="WaypointsListView"
               >
         <ListView.ItemTemplate>
             <DataTemplate>
-                
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <!-- Move -->
                     <Rectangle Grid.Column="0"
                                Width="20"
@@ -114,14 +113,10 @@
                                 </Rectangle.OpacityMask>
                             </Rectangle>
                         </Button>
-
                     </StackPanel>
-
-                    
-
                 </Grid>
-                
             </DataTemplate>
         </ListView.ItemTemplate>
+        
     </ListView>
 </UserControl>
