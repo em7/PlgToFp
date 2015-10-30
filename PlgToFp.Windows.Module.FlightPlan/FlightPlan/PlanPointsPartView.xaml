@@ -10,30 +10,12 @@
              mc:Ignorable="d" 
              x:Name="PointsPlanView"
              d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance local:PlanPointsPartViewModelDesign, IsDesignTimeCreatable=True}"
              >
-
-    <!--d:DataContext="{d:DesignInstance local:PlanPointsPartViewModel}"-->
-    <UserControl.DataContext>
-        <local:PlanPointsPartViewModelDesign  />
-    </UserControl.DataContext>
     
     <UserControl.Resources>
         <converters:CoordsLatNumToFmcConverter x:Key="LatCoordsConverter" />
         <converters:CoordsLonNumToFmcConverter x:Key="LonCoordsConverter" />
-
-        <!--<Dialog:CustomDialog x:Key="CustomCloseDialogTest"
-                                 Title="Custom Dialog which is awaitable"
-                                 x:Name="CustomCloseDialogTest">
-
-            <StackPanel>
-                <TextBlock Height="30" Text="This dialog allows arbitrary content. You have to close it yourself by clicking the close button below." 
-                               TextWrapping="Wrap"
-                               Foreground="{DynamicResource AccentColorBrush}" />
-                <Button Content="Close Me!"
-                        Command="{Binding CloseDialogCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Dialog:CustomDialog}}}"/>
-            </StackPanel>
-        </Dialog:CustomDialog>-->
     </UserControl.Resources>
 
     <ListView ItemsSource="{Binding Path=ParentFlightPlan.FlightPlan.Waypoints}"
@@ -46,13 +28,16 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel.Resources>
-                        
-                    </StackPanel.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     
                     <!-- Move -->
-                    <Rectangle Width="20"
+                    <Rectangle Grid.Column="0"
+                               Width="20"
                                Height="20"
                                Margin="4,0"
                                VerticalAlignment="Center"
@@ -74,7 +59,8 @@
                     </Rectangle>
 
                     <!-- Ident, Coords -->
-                    <StackPanel Orientation="Vertical"
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical"
                                 VerticalAlignment="Center"
                                 Margin="4,0">
                         <TextBlock Text="{Binding Path=Identifier}"
@@ -86,25 +72,54 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <!-- edit button -->
-                    <Button Width="40"
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Margin="4,0">
+
+                        <!-- edit button -->
+                        <Button Width="40"
                             Height="40"
                             Margin="4,0"
                             Style="{DynamicResource MetroCircleButtonStyle}"
                             Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                             >
-                        <!--CommandParameter="{StaticResource CustomCloseDialogTest}"-->
-                        <Rectangle Width="16"
+                            <!--CommandParameter="{StaticResource CustomCloseDialogTest}"-->
+                            <Rectangle Width="16"
                                    Height="16"
                                    Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill"
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
                                              Visual="{DynamicResource appbar_edit}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Button>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
 
-                </StackPanel>
+                        <!-- Delete button -->
+                        <Button Width="40"
+                                Height="40"
+                                Margin="4,0"
+                                Style="{DynamicResource MetroCircleButtonStyle}"
+                                Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                CommandParameter="{Binding Identifier}"
+                            >
+                            <!--CommandParameter="{StaticResource CustomCloseDialogTest}"-->
+                            <Rectangle Width="16"
+                                   Height="16"
+                                   Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"
+                                                 Visual="{DynamicResource appbar_delete}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+
+                    </StackPanel>
+
+                    
+
+                </Grid>
                 
             </DataTemplate>
         </ListView.ItemTemplate>

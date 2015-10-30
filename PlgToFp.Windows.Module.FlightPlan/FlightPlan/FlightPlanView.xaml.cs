@@ -22,8 +22,8 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
     {
         public FlightPlanView(FlightPlanViewModel viewmodel)
         {
-            this.DataContext = viewmodel;
             InitializeComponent();
+            this.DataContext = viewmodel;
         }
     }
 }

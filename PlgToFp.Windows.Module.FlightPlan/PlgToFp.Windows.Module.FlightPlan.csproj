@@ -97,6 +97,11 @@
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
     <Compile Include="FlightPlan\Converter\CoordsLonNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\Converter\CoordsLatNumToFmcConverter.cs" />
+    <Compile Include="FlightPlan\DeleteWaypointDlgContent.xaml.cs">
+      <DependentUpon>DeleteWaypointDlgContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightPlan\DeleteWaypointDlgViewModelDesign.cs" />
+    <Compile Include="FlightPlan\DeleteWaypointDlgViewModel.cs" />
     <Compile Include="FlightPlan\DragAdorner.cs" />
     <Compile Include="FlightPlan\FlightPlanViewModelDesign.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
@@ -156,6 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="FlightPlanToolbar\FlightPlanToolBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightPlan\DeleteWaypointDlgContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,6 +26,11 @@ namespace PlgToFp.Windows.Infrastructure.Helpers
             return DesignerProperties.GetIsInDesignMode(_myDo);
         }
 
+        public bool IsInDesignModeProperty
+        {
+            get { return IsInDesignMode(); }
+        }
+
         private class MyDependencyObject : DependencyObject { }
     }
 }

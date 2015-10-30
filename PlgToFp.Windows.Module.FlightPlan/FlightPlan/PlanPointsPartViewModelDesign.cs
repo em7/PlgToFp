@@ -19,7 +19,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
     {
         public PlanPointsPartViewModelDesign() : this(true) { }
     
-        public PlanPointsPartViewModelDesign(bool createParent) : base(null)
+        public PlanPointsPartViewModelDesign(bool createParent) : base(null, null)
         {
             if (createParent && DesignHelper.IsInDesignMode())
             {

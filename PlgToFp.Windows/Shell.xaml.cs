@@ -26,6 +26,7 @@ namespace PlgToFp.Windows
     public partial class Shell : MetroWindow
     {
         private IEventAggregator _evtAggregator;
+        private IList<CustomDialog> _shownDialogs = new List<CustomDialog>(1);
         public Shell(IEventAggregator evtAggregator)
         {
             _evtAggregator = evtAggregator;
@@ -50,19 +51,34 @@ namespace PlgToFp.Windows
         {
             if (payload == null 
                 || payload.DialogContent == null
-                || (! (payload.DialogContent is BaseMetroDialog)))
+                || (! (payload.DialogContent is FrameworkElement)))
                 return;
-            await this.ShowMetroDialogAsync((BaseMetroDialog)payload.DialogContent);
+
+            var cnt = (FrameworkElement)payload.DialogContent;
+            var dlg = new CustomDialog();
+            dlg.Content = cnt;
+            dlg.Title = payload.Header;
+            _shownDialogs.Add(dlg);
+
+            await this.ShowMetroDialogAsync(dlg);
         }
 
         private async Task CloseDialogAsync(CloseDialogEventPayload payload)
         {
             if (payload == null
                 || payload.DialogContent == null
-                || (!(payload.DialogContent is BaseMetroDialog)))
+                || (!(payload.DialogContent is FrameworkElement)))
                 return;
 
-            await this.HideMetroDialogAsync((BaseMetroDialog)payload.DialogContent);
+            var cnt = (FrameworkElement)payload.DialogContent;
+            var dlg = _shownDialogs.FirstOrDefault(d => d.Content == cnt);
+
+            if (dlg != null)
+            {
+                await this.HideMetroDialogAsync(dlg);
+                _shownDialogs.Remove(dlg);
+            }
+            
         }
     }
 }

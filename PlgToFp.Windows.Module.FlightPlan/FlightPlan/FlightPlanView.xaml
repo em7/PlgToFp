@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
              xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
+             xmlns:infraHelpers="clr-namespace:PlgToFp.Windows.Infrastructure.Helpers;assembly=PlgToFp.Windows.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             
+             d:DataContext="{d:DesignInstance Type=local:FlightPlanViewModelDesign, IsDesignTimeCreatable=True}"
              >
 
     <!--d:DataContext="{d:DesignInstance local:FlightPlanViewModel}"-->
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <local:FlightPlanViewModelDesign />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
+
     
     <Grid>
         <!--Main Content-->

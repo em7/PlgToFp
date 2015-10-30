@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
+namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
     /// <summary>
-    /// Interaction logic for FlightPlanToolBar.xaml
+    /// Interaction logic for DeleteWaypointDlgContent.xaml
     /// </summary>
-    public partial class FlightPlanToolbarView : UserControl
+    public partial class DeleteWaypointDlgContent : UserControl
     {
-        public FlightPlanToolbarView(FlightPlanToolBarViewModel viewmodel)
+        public DeleteWaypointDlgContent(DeleteWaypointDlgViewModel viewmodel)
         {
-            
             InitializeComponent();
             this.DataContext = viewmodel;
         }
