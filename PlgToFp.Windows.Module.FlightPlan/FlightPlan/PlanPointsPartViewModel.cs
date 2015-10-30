@@ -1,7 +1,9 @@
 ﻿using Microsoft.Practices.Unity;
 using PlgToFp.Windows.Infrastructure.Interaction.Event;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Logging;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         #region Private properties
         private IEventAggregator _evtAggregator;
         private IUnityContainer _container;
+        private ILoggerFacade _logger;
         #endregion
 
         #region Bindable properties
@@ -48,12 +51,13 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
 
         #region ctor
-        public PlanPointsPartViewModel(IEventAggregator evtAggregator, IUnityContainer container)
+        public PlanPointsPartViewModel(IEventAggregator evtAggregator, IUnityContainer container, ILoggerFacade logger)
         {
             _evtAggregator = evtAggregator;
             _container = container;
+            _logger = logger;
             _editCommand = new DelegateCommand<object>(HandleEditCmd);
-            _deleteCommand = new DelegateCommand<string>(HandleDeleteCmd);
+            _deleteCommand = new DelegateCommand<WaypointModel>(HandleDeleteCmd);
             _closeDialogCommand = new DelegateCommand<object>(HandleCloseCmd);
         } 
         #endregion
@@ -72,28 +76,49 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             _evtAggregator.GetEvent<CloseDialogEvent>()
                 .Publish(new CloseDialogEventPayload() { DialogContent = dialogContent });
         } 
-        private void HandleDeleteCmd(string identifier)
+        private void HandleDeleteCmd(WaypointModel waypoint)
         {
+            if (waypoint == null)
+                return;
+
             var dlgCnt = _container.Resolve<DeleteWaypointDlgContent>();
             var dlgVm = dlgCnt.DataContext as DeleteWaypointDlgViewModel;
             if (dlgVm != null)
             {
-                dlgVm.Identifier = identifier;
+                dlgVm.Identifier = waypoint.Identifier;
+                dlgVm.DeleteWaypointCallback = () => DeleteWaypoint(waypoint);
             }
 
             _evtAggregator.GetEvent<ShowDialogEvent>()
                 .Publish(new ShowDialogEventPayload() {
                     DialogContent = dlgCnt,
-                    Header = string.Format("Delete waypoint '{0}'?", identifier),
+                    Header = string.Format("Delete waypoint '{0}'?", waypoint.Identifier),
                 });
         }
         #endregion
 
 
+        #region Private functions
+        private void DeleteWaypoint(WaypointModel waypoint)
+        {
+            if (waypoint == null || _parentFlightPlan == null)
+            {
+                _logger.Log(string.Format("{0}:DeleteWaypoint - waypoint or parent flight plan null. Waypoint: {1}; ParentFlightPlan: {2};",
+                                            this.GetType().FullName,
+                                            waypoint == null ? "null" : "OK",
+                                            _parentFlightPlan == null ? "null" : "OK"),
+                            Category.Warn,
+                            Priority.Medium
+                    );
+                return;
+            }
+
+            ParentFlightPlan.RemoveWaypoint(waypoint);
+        }
+        #endregion
 
 
 
-        
 
 
 

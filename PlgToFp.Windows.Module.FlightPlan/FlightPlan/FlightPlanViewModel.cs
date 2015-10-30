@@ -153,8 +153,15 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
                 }
             }
         }
-        #endregion
 
+        public void RemoveWaypoint(WaypointModel waypoint)
+        {
+            if (FlightPlan == null || waypoint == null)
+                return;
+
+            FlightPlan.Waypoints.Remove(waypoint);
+        }
+        #endregion
         #region private functions
         /// <summary>
         /// Checks the exceptions which can occur during opening the flight plan and

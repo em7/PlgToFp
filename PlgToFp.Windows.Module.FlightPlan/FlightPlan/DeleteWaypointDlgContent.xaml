@@ -30,7 +30,7 @@
                     MinWidth="100"
                     Margin="5,0"
                     Style="{DynamicResource AccentedSquareButtonStyle}"
-                    Command="{Binding CloseCommand}"
+                    Command="{Binding DeleteWpCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
             
             <Button VerticalAlignment="Center"

@@ -1,6 +1,7 @@
 ﻿using PlgToFp.Windows.Infrastructure.Interaction.Event;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Logging;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,19 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
     {
         #region Private properties
         private IEventAggregator _evtAggregator;
+        private ILoggerFacade _logger;
+        #endregion
+
+        #region Public callbacks
+        public Action DeleteWaypointCallback { get; set; }
         #endregion
 
         #region Commands
         private ICommand _closeCommand;
         public ICommand CloseCommand { get { return _closeCommand; } }
+
+        private ICommand _deleteWpCommand;
+        public ICommand DeleteWpCommand { get { return _deleteWpCommand; } }
         #endregion
 
         #region Bindable properties
@@ -38,13 +47,35 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         #endregion
 
         #region ctor
-        public DeleteWaypointDlgViewModel(IEventAggregator evtAggregator)
+        public DeleteWaypointDlgViewModel(IEventAggregator evtAggregator, ILoggerFacade logger)
         {
             _evtAggregator = evtAggregator;
+            _logger = logger;
             _closeCommand = new DelegateCommand<FrameworkElement>(HandleCloseCmd);
+            _deleteWpCommand = new DelegateCommand<FrameworkElement>(HandleDeleteCmd);
+        }
+        #endregion
+
+        #region Command handlers
+        private void HandleCloseCmd(FrameworkElement dlgCnt)
+        {
+            CloseDlg(dlgCnt);
         }
 
-        private void HandleCloseCmd(FrameworkElement dlgCnt)
+        private void HandleDeleteCmd(FrameworkElement dlgCnt)
+        {
+            if (DeleteWaypointCallback == null)
+            {
+                _logger.Log(string.Format("{0}:HandleDeleteCmd - DeleteWaypointCallback is null.", GetType().FullName),
+                    Category.Warn, Priority.Medium);
+                return;
+            }
+
+            CloseDlg(dlgCnt);
+            DeleteWaypointCallback();
+        }
+
+        private void CloseDlg(FrameworkElement dlgCnt)
         {
             _evtAggregator.GetEvent<CloseDialogEvent>()
                 .Publish(new CloseDialogEventPayload() { DialogContent = dlgCnt });

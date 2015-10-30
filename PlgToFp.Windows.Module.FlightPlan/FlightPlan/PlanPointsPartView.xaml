@@ -102,7 +102,7 @@
                                 Margin="4,0"
                                 Style="{DynamicResource MetroCircleButtonStyle}"
                                 Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                CommandParameter="{Binding Identifier}"
+                                CommandParameter="{Binding}"
                             >
                             <!--CommandParameter="{StaticResource CustomCloseDialogTest}"-->
                             <Rectangle Width="16"
