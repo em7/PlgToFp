@@ -103,6 +103,11 @@
     <Compile Include="FlightPlan\DeleteWaypointDlgViewModelDesign.cs" />
     <Compile Include="FlightPlan\DeleteWaypointDlgViewModel.cs" />
     <Compile Include="FlightPlan\DragAdorner.cs" />
+    <Compile Include="FlightPlan\EditWaypointView.xaml.cs">
+      <DependentUpon>EditWaypointView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightPlan\EditWaypointViewModel.cs" />
+    <Compile Include="FlightPlan\EditWaypointViewModelDesign.cs" />
     <Compile Include="FlightPlan\FlightPlanViewModelDesign.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
     <Compile Include="FlightPlan\PlanPointsPartView.xaml.cs">
@@ -123,6 +128,8 @@
     </Compile>
     <Compile Include="FlightPlan\FlightPlanViewModel.cs" />
     <Compile Include="FlightPlan\Service\IFlightPlanIoService.cs" />
+    <Compile Include="FlightPlan\Service\INavigationService.cs" />
+    <Compile Include="FlightPlan\Service\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -165,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FlightPlan\DeleteWaypointDlgContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightPlan\EditWaypointView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

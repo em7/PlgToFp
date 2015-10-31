@@ -29,9 +29,15 @@ namespace PlgToFp.Windows.Module.FlightPlan
         public void Initialize()
         {
             _container.RegisterInstance(typeof(IFlightPlanIoService), _container.Resolve<FlightPlanIoService>());
+            _container.RegisterInstance(typeof(INavigationService), _container.Resolve<NavigationService>());
+
+            _container.RegisterType<object, FlightPlanView>("FlightPlanView");
+            _container.RegisterType<object, EditWaypointView>("EditWaypointView");
 
             _regionManager.RegisterViewWithRegion(Regions.Toolbar, typeof(FlightPlanToolbar.FlightPlanToolbarView));
             _regionManager.RegisterViewWithRegion(Regions.Main, typeof(FlightPlan.FlightPlanView));
+
+
         }
     }
 }

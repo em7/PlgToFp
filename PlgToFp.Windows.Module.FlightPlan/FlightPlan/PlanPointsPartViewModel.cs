@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using PlgToFp.Windows.Infrastructure.Interaction.Event;
 using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Service;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
@@ -20,6 +21,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         private IEventAggregator _evtAggregator;
         private IUnityContainer _container;
         private ILoggerFacade _logger;
+        private INavigationService _navigationService;
         #endregion
 
         #region Bindable properties
@@ -44,19 +46,21 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         public ICommand DeleteCommand { get { return _deleteCommand; } }
 
         private ICommand _closeDialogCommand;
-
+        
         public ICommand CloseDialogCommand { get { return _closeDialogCommand; } }
         #endregion
 
 
 
         #region ctor
-        public PlanPointsPartViewModel(IEventAggregator evtAggregator, IUnityContainer container, ILoggerFacade logger)
+        public PlanPointsPartViewModel(IEventAggregator evtAggregator, IUnityContainer container,
+            ILoggerFacade logger, INavigationService navigationService)
         {
             _evtAggregator = evtAggregator;
             _container = container;
             _logger = logger;
-            _editCommand = new DelegateCommand<object>(HandleEditCmd);
+            _navigationService = navigationService;
+            _editCommand = new DelegateCommand<WaypointModel>(HandleEditCmd);
             _deleteCommand = new DelegateCommand<WaypointModel>(HandleDeleteCmd);
             _closeDialogCommand = new DelegateCommand<object>(HandleCloseCmd);
         } 
@@ -66,10 +70,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
 
         #region Command handlers
-        private void HandleEditCmd(object dialogContent)
+        private void HandleEditCmd(WaypointModel waypoint)
         {
-            //_evtAggregator.GetEvent<ShowDialogEvent>()
-            //    .Publish(new ShowDialogEventPayload() { DialogContent = dialogContent });
+            _navigationService.EditWaypoint(waypoint);
         }
         private void HandleCloseCmd(object dialogContent)
         {
