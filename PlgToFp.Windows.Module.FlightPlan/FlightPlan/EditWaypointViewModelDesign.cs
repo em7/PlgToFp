@@ -13,5 +13,10 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         {
             WaypointModel = new WaypointModel() { Identifier = "IDENT", Latitude = 6.66, Longitude = 12.89 };
         }
+
+        protected override bool CanGoBackCmd()
+        {
+            return true;
+        }
     }
 }

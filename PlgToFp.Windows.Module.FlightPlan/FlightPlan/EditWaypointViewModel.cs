@@ -1,4 +1,5 @@
 ﻿using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model;
+using Prism.Commands;
 using Prism.Logging;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
@@ -35,11 +37,32 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         }
         #endregion
 
+        #region Commands
+        private ICommand _goBackCommand;
+        public ICommand GoBackCommand { get { return _goBackCommand; } }
+        #endregion
 
         #region ctor
         public EditWaypointViewModel(ILoggerFacade logger)
         {
             _logger = logger;
+
+            _goBackCommand = new DelegateCommand(HandleGoBackCmd, CanGoBackCmd);
+        }
+        #endregion
+
+        #region Command handlers
+        private void HandleGoBackCmd()
+        {
+            if (!CanGoBackCmd())
+                return;
+
+            _regionNavSvc.Journal.GoBack();
+        }
+
+        protected virtual bool CanGoBackCmd()
+        {
+            return _regionNavSvc.Journal.CanGoBack;
         }
         #endregion
 

@@ -7,8 +7,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance local:EditWaypointViewModelDesign, IsDesignTimeCreatable=True}">
-    <StackPanel>
-       <TextBlock Text="Edit waypoint" />
-       <TextBlock Text="{Binding Path=WaypointModel.Identifier}" />
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Width="40"
+                    Height="40"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    Command="{Binding GoBackCommand}">
+                <Rectangle Width="16"
+                           Height="16"
+                           Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{DynamicResource appbar_arrow_left}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+            
+            <Label FontSize="25"
+                   Content="Edit Waypoint" />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            
+        
+           <TextBlock Text="Edit a copy of waypoint, commit change if clicked OK button" />
+           <TextBlock Text="{Binding Path=WaypointModel.Identifier}" />
+        </StackPanel>
+    </Grid>
 </UserControl>
