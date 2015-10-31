@@ -65,6 +65,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
         /// </summary>
         public FlightPlanModel()
         {
+#if DEBUG
             if (DesignHelper.IsInDesignMode())
             {
                 Waypoints = new ObservableCollection<WaypointModel>(new List<WaypointModel>
@@ -74,7 +75,8 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model
                     new WaypointModel() { Identifier = "ID3", Latitude = 6.66, Longitude = -12.89 },
                     new WaypointModel() { Identifier = "ID4", Latitude = -6.66, Longitude = -12.89 },
                 });
-            }
+            } 
+#endif
         }
         #endregion
 
