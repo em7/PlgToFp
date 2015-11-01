@@ -174,6 +174,13 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
         }
         #endregion
 
+        //#region ConvertBack
+        //public void ConvertBack0Test()
+        //{
+        //    var coord = "N00°00.0";
+        //}
+        //#endregion
+
         //[TestMethod()]
         //public void ConvertBackTest()
         //{

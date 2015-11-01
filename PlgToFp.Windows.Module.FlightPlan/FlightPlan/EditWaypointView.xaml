@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="550" d:DesignWidth="700"
              d:DataContext="{d:DesignInstance local:EditWaypointViewModelDesign, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,7 +13,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <!-- HEADER -->
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,5,0,18">
             <Button Width="40"
                     Height="40"
                     Style="{DynamicResource MetroCircleButtonStyle}"
@@ -28,15 +30,58 @@
                 </Rectangle>
             </Button>
             
-            <Label FontSize="25"
-                   Content="Edit Waypoint" />
+            <Label Content="Edit Waypoint"
+                   Style="{StaticResource HeaderLabelStyle}" />
         </StackPanel>
-        
-        <StackPanel Grid.Row="1">
-            
-        
-           <TextBlock Text="Edit a copy of waypoint, commit change if clicked OK button" />
-           <TextBlock Text="{Binding Path=WaypointModel.Identifier}" />
+
+        <!-- CONTENT -->
+        <StackPanel Grid.Row="1"
+                    Margin="5,0"
+                    Width="400"
+                    HorizontalAlignment="Left">
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Identifier"
+                       Style="{StaticResource BaseLabelStyle}" />
+                <TextBox Text="{Binding Identifier}"
+            	         Style="{StaticResource BaseTextBoxStyle}"
+                         />
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Latitude"
+                       Style="{StaticResource BaseLabelStyle}" />
+                <TextBox Text="{Binding Latitude}"
+            	         Style="{StaticResource BaseTextBoxStyle}"
+                         />
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Longitude"
+                       Style="{StaticResource BaseLabelStyle}" />
+                <TextBox Text="{Binding Longitude}"
+            	         Style="{StaticResource BaseTextBoxStyle}"
+                         />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,15,0,15">
+                <Button VerticalAlignment="Center"
+                        IsDefault="True"
+                        Content="Save changes"
+                        MinWidth="100"
+                        Margin="5,0"
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Command="{Binding SaveCommand}"
+                        />
+
+                <Button VerticalAlignment="Center"
+                        Content="Cancel edit"
+                        MinWidth="100"
+                        Margin="5,0,0,0"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        Command="{Binding GoBackCommand}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

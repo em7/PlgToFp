@@ -69,4 +69,18 @@
     <Style x:Key="TextLarger" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="15" />
     </Style>
+
+    <Style x:Key="HeaderLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="25" />
+    </Style>
+
+    <Style x:Key="BaseLabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style x:Key="BaseTextBoxStyle" TargetType="TextBox">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+    </Style>
 </ResourceDictionary>

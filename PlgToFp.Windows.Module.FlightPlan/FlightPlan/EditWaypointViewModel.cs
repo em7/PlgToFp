@@ -33,6 +33,40 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             {
                 SetProperty(ref _waypointModel, value);
                 OnPropertyChanged(() => WaypointModel);
+                ReadWaypointVmProperties();
+            }
+        }
+
+        private string _identifier;
+        public string Identifier
+        {
+            get { return _identifier; }
+            set
+            {
+                SetProperty(ref _identifier, value);
+                OnPropertyChanged(() => Identifier);
+            }
+        }
+
+        private double _latitude;
+        public double Latitude
+        {
+            get { return _latitude; }
+            set
+            {
+                SetProperty(ref _latitude, value);
+                OnPropertyChanged(() => Latitude);
+            }
+        }
+
+        private double _longitude;
+        public double Longitude
+        {
+            get { return _longitude; }
+            set
+            {
+                SetProperty(ref _longitude, value);
+                OnPropertyChanged(() => Longitude);
             }
         }
         #endregion
@@ -40,6 +74,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         #region Commands
         private ICommand _goBackCommand;
         public ICommand GoBackCommand { get { return _goBackCommand; } }
+
+        private ICommand _saveCommand;
+        public ICommand SaveCommand { get { return _saveCommand; } }
         #endregion
 
         #region ctor
@@ -48,6 +85,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             _logger = logger;
 
             _goBackCommand = new DelegateCommand(HandleGoBackCmd, CanGoBackCmd);
+            _saveCommand = new DelegateCommand(HandleSaveCmd);
         }
         #endregion
 
@@ -64,8 +102,53 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         {
             return _regionNavSvc.Journal.CanGoBack;
         }
+
+        private void HandleSaveCmd()
+        {
+            UpdateWaypointVmProperties();
+
+            if (!CanGoBackCmd())
+                return;
+
+            _regionNavSvc.Journal.GoBack();
+        }
         #endregion
 
+        #region Private functions
+        /// <summary>
+        /// Reads the properties of viewmodel and makes copy of them so
+        /// they can be edited and the edit commited/discarded later
+        /// </summary>
+        private void ReadWaypointVmProperties()
+        {
+            if (WaypointModel != null)
+            {
+                Identifier = WaypointModel.Identifier;
+                Longitude = WaypointModel.Longitude;
+                Latitude = WaypointModel.Latitude;
+            }
+            else
+            {
+                Identifier = "";
+                Longitude = 0d;
+                Latitude = 0d;
+            }
+            
+        }
+
+        /// <summary>
+        /// Updates the properties of viewmodel => commits the edit changes
+        /// </summary>
+        private void UpdateWaypointVmProperties()
+        {
+            if (WaypointModel != null)
+            {
+                WaypointModel.Identifier = Identifier;
+                WaypointModel.Longitude = Longitude;
+                WaypointModel.Latitude = Latitude;
+            }
+        }
+        #endregion
 
 
         #region INavigationAware
