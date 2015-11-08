@@ -90,11 +90,18 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlightPlan\Controls\IFlightPlanMapPoint.cs" />
+    <Compile Include="FlightPlan\FlightPlanMapView.xaml.cs">
+      <DependentUpon>FlightPlanMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightPlan\FlightPlanMapViewModel.cs" />
+    <Compile Include="FlightPlan\FlightPlanMapViewModelDesign.cs" />
     <Compile Include="FlightPlanModule.cs" />
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarView.xaml.cs">
       <DependentUpon>FlightPlanToolBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="FlightPlanToolbar\FlightPlanToolBarViewModel.cs" />
+    <Compile Include="FlightPlan\Controls\FlightPlanMap.cs" />
     <Compile Include="FlightPlan\Converter\CoordsLonNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\Converter\CoordsLatNumToFmcConverter.cs" />
     <Compile Include="FlightPlan\DeleteWaypointDlgContent.xaml.cs">
@@ -109,6 +116,7 @@
     <Compile Include="FlightPlan\EditWaypointViewModel.cs" />
     <Compile Include="FlightPlan\EditWaypointViewModelDesign.cs" />
     <Compile Include="FlightPlan\FlightPlanViewModelDesign.cs" />
+    <Compile Include="FlightPlan\WaypointMapPointAdapter.cs" />
     <Compile Include="FlightPlan\Model\WaypointModel.cs" />
     <Compile Include="FlightPlan\PlanPointsPartView.xaml.cs">
       <DependentUpon>PlanPointsPartView.xaml</DependentUpon>
@@ -167,6 +175,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="FlightPlan\FlightPlanMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FlightPlanToolbar\FlightPlanToolBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +206,10 @@
     <Page Include="Resources\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

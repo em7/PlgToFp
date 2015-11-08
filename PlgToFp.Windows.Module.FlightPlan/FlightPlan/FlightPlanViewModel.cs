@@ -25,11 +25,14 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         #region ctor
 
-        public FlightPlanViewModel(IEventAggregator evtAggregator, PlanPointsPartViewModel planPointsVm)
+        public FlightPlanViewModel(IEventAggregator evtAggregator, PlanPointsPartViewModel planPointsVm,
+            FlightPlanMapViewModel flightPlanMapViewModel)
         {
             _evtAggregator = evtAggregator;
             _planPointsViewModel = planPointsVm;
             _planPointsViewModel.ParentFlightPlan = this;
+            _flightPlanMapViewModel = flightPlanMapViewModel;
+            _flightPlanMapViewModel.ParentFlightPlan = this;
 
             var reqPlanShowEvt = _evtAggregator.GetEvent<FlightPlanReqPlanShowEvent>();
             var openPlanErrEvt = _evtAggregator.GetEvent<FlightPlanOpenErrorEvent>();
@@ -92,6 +95,17 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             {
                 SetProperty(ref _planPointsViewModel, value);
                 OnPropertyChanged(() => PlanPointsViewModel);
+            }
+        }
+
+        private FlightPlanMapViewModel _flightPlanMapViewModel;
+        public FlightPlanMapViewModel FlightPlanMapViewModel
+        {
+            get { return _flightPlanMapViewModel; }
+            set
+            {
+                SetProperty(ref _flightPlanMapViewModel, value);
+                OnPropertyChanged(() => FlightPlanMapViewModel);
             }
         }
 

@@ -7,7 +7,7 @@
              xmlns:model="clr-namespace:PlgToFp.Windows.Module.FlightPlan.FlightPlan.Model"
              xmlns:infraHelpers="clr-namespace:PlgToFp.Windows.Infrastructure.Helpers;assembly=PlgToFp.Windows.Infrastructure"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance Type=local:FlightPlanViewModelDesign, IsDesignTimeCreatable=True}"
              >
 
@@ -32,12 +32,19 @@
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
-            
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
+            
+            <StackPanel Grid.Row="0" Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal">
 
                 <TextBlock Grid.Column="0"
                            Text="{Binding Path=FlightPlan.Origin, TargetNullValue='', FallbackValue=''}"
@@ -57,8 +64,14 @@
                            Style="{StaticResource HeaderTextBlockStyle}"/>
             </StackPanel>
 
-            <local:PlanPointsPartView Grid.Row="1" Margin="0,4,0,4"
-                                  DataContext="{Binding Path=PlanPointsViewModel}"/>
+            <local:PlanPointsPartView Grid.Row="1" Grid.Column="0"
+                                      Margin="0,4,0,4"
+                                      DataContext="{Binding Path=PlanPointsViewModel}"/>
+
+            <local:FlightPlanMapView Grid.Row="1" Grid.Column="1"
+                                     Margin="0,4,0,4" 
+                                     DataContext="{Binding Path=FlightPlanMapViewModel}"/>
+            
         </Grid>
         
         <!-- error message -->
