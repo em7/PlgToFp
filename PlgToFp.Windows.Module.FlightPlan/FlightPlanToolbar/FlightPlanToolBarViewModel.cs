@@ -32,6 +32,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlanToolbar
             InitializeCommands();
             _interactionService = interactionService;
             _evtAggregator = evtAggregator;
+
+#if DEBUG
+            var evtPayload = new FlightPlanReqPlanGOpenEventPayload() { Path = @"DebugData\PANCPAFA.plg" };
+            _evtAggregator.GetEvent<FlightPlanReqPlanGOpenEvent>().Publish(evtPayload);
+#endif
         }
 
         private void InitializeCommands()
