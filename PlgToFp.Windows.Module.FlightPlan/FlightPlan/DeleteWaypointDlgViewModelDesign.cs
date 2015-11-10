@@ -16,6 +16,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
     {
         public DeleteWaypointDlgViewModelDesign() : base(null, null)
         {
+            int i = 5 + 5;
             Identifier = "IDENT ";
         }
 
