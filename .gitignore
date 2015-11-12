@@ -212,4 +212,4 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # Don't ignore debug data
-!*[Dd]ebug[Dd]ata/*
+!PANCPAFA.plg

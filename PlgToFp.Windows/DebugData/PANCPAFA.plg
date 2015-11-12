@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FlightPlan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" FlightRules="VFR" Routing="GPS_Direct">
+  <Author />
+  <Name>PANCPAFA</Name>
+  <LongName>Stevens_Anchorage_Intl (PANC) to Fairbanks_Intl (PAFA)</LongName>
+  <CurrentFileName>PANCPAFA</CurrentFileName>
+  <DepartureID>PANC</DepartureID>
+  <DestinationID>PAFA</DestinationID>
+  <Altitude>11500</Altitude>
+  <MEF>11500</MEF>
+  <Stations>
+    <Station>PANC	61,176653	-149,982435</Station>
+    <Station>BGQ	61,56945419	-149,96714783</Station>
+    <Station>TKA	62,29865646	-150,10559082</Station>
+    <Station>UMM	63,31131363	-149,13067627</Station>
+    <Station>ENN	64,5900116	-149,07287598</Station>
+    <Station>PAFA	64,81106	-147,848479</Station>
+  </Stations>
+  <Nodes>
+    <Waypoint>
+      <NodeType>Airport</NodeType>
+      <Identifier>PANC</Identifier>
+      <Description>Stevens_Anchorage_Intl</Description>
+      <Latitude>61.176653</Latitude>
+      <Longitude>-149.982435</Longitude>
+      <Elevation>152</Elevation>
+      <Variation>-20.54583740234375</Variation>
+      <Owner>PANC</Owner>
+      <PassingAltitude>0</PassingAltitude>
+      <StartPosition>
+        <Name>07R</Name>
+        <Descr />
+        <Latitude>61.167819</Latitude>
+        <Longitude>-150.034372</Longitude>
+      </StartPosition>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+    <Waypoint>
+      <NodeType>VOR</NodeType>
+      <Identifier>BGQ</Identifier>
+      <Description>BIG LAKE (112,5 MHz)</Description>
+      <Latitude>61.56945419</Latitude>
+      <Longitude>-149.96714783</Longitude>
+      <Elevation>160</Elevation>
+      <Variation>-20.690193176269531</Variation>
+      <Region />
+      <Owner />
+      <PassingAltitude>0</PassingAltitude>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+    <Waypoint>
+      <NodeType>VOR</NodeType>
+      <Identifier>TKA</Identifier>
+      <Description>TALKEETNA (116,2 MHz)</Description>
+      <Latitude>62.29865646</Latitude>
+      <Longitude>-150.10559082</Longitude>
+      <Elevation>565</Elevation>
+      <Variation>-20.895698547363281</Variation>
+      <Region />
+      <Owner />
+      <PassingAltitude>0</PassingAltitude>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+    <Waypoint>
+      <NodeType>NDB</NodeType>
+      <Identifier>UMM</Identifier>
+      <Description>SUMMIT (326 KHz)</Description>
+      <Latitude>63.31131363</Latitude>
+      <Longitude>-149.13067627</Longitude>
+      <Elevation>2385</Elevation>
+      <Variation>-21.668317794799805</Variation>
+      <Region />
+      <Owner />
+      <PassingAltitude>0</PassingAltitude>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+    <Waypoint>
+      <NodeType>VOR</NodeType>
+      <Identifier>ENN</Identifier>
+      <Description>NENANA (115,8 MHz)</Description>
+      <Latitude>64.5900116</Latitude>
+      <Longitude>-149.07287598</Longitude>
+      <Elevation>1600</Elevation>
+      <Variation>-22.1950740814209</Variation>
+      <Region />
+      <Owner />
+      <PassingAltitude>0</PassingAltitude>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+    <Waypoint>
+      <NodeType>Airport</NodeType>
+      <Identifier>PAFA</Identifier>
+      <Description>Fairbanks_Intl</Description>
+      <Latitude>64.81106</Latitude>
+      <Longitude>-147.848479</Longitude>
+      <Elevation>433</Elevation>
+      <Variation>-22.794902801513672</Variation>
+      <Owner>PAFA</Owner>
+      <PassingAltitude>0</PassingAltitude>
+      <Group />
+      <Notes />
+      <XRef1Label />
+      <XRef2Label />
+    </Waypoint>
+  </Nodes>
+  <ApproachName />
+  <ApproachICAO />
+  <TransitionName />
+  <TransitionIndex>0</TransitionIndex>
+</FlightPlan>
