@@ -4,15 +4,22 @@ using Prism.Logging;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using PlgToFp.Windows.Infrastructure.ViewModel;
+using PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter;
 
 namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 {
-    public class EditWaypointViewModel : BindableBase, INavigationAware
+    public class EditWaypointViewModel : ViewModel
     {
         #region Constants
         public static string NAV_PARAM_WAYPOINT = "NAV_PARAM_WAYPOINT";
@@ -21,6 +28,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         #region Private fields
         private ILoggerFacade _logger;
         private IRegionNavigationService _regionNavSvc;
+
+        private Converter.CoordsLatNumToFmcConverter _latConverter = new CoordsLatNumToFmcConverter();
+        private Converter.CoordsLonNumToFmcConverter _lonConverter = new CoordsLonNumToFmcConverter(); 
         #endregion
 
         #region Bindable properties
@@ -48,24 +58,26 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
         }
 
-        private double _latitude;
-        public double Latitude
+        private string _latitude;
+        public string Latitude
         {
             get { return _latitude; }
             set
             {
                 SetProperty(ref _latitude, value);
+                ValidateLatitude(value);
                 OnPropertyChanged(() => Latitude);
             }
         }
 
-        private double _longitude;
-        public double Longitude
+        private string _longitude;
+        public string Longitude
         {
             get { return _longitude; }
             set
             {
                 SetProperty(ref _longitude, value);
+                ValidateLatitude(value);
                 OnPropertyChanged(() => Longitude);
             }
         }
@@ -75,7 +87,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         private ICommand _goBackCommand;
         public ICommand GoBackCommand { get { return _goBackCommand; } }
 
-        private ICommand _saveCommand;
+        private DelegateCommand _saveCommand;
         public ICommand SaveCommand { get { return _saveCommand; } }
         #endregion
 
@@ -85,7 +97,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             _logger = logger;
 
             _goBackCommand = new DelegateCommand(HandleGoBackCmd, CanGoBackCmd);
-            _saveCommand = new DelegateCommand(HandleSaveCmd);
+            _saveCommand = new DelegateCommand(HandleSaveCmd, CanSaveCmd);
         }
         #endregion
 
@@ -112,6 +124,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
             _regionNavSvc.Journal.GoBack();
         }
+
+        private bool CanSaveCmd()
+        {
+            return !(HasErrors);
+        }
         #endregion
 
         #region Private functions
@@ -124,14 +141,16 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             if (WaypointModel != null)
             {
                 Identifier = WaypointModel.Identifier;
-                Longitude = WaypointModel.Longitude;
-                Latitude = WaypointModel.Latitude;
+                Longitude = _lonConverter.Convert(WaypointModel.Longitude, typeof (string), null,
+                                CultureInfo.InvariantCulture) as string;
+                Latitude = _latConverter.Convert(WaypointModel.Latitude, typeof (string), null,
+                                CultureInfo.InvariantCulture) as string;
             }
             else
             {
                 Identifier = "";
-                Longitude = 0d;
-                Latitude = 0d;
+                Longitude = "E000°00.0";
+                Latitude = "N00°00.0";
             }
             
         }
@@ -144,26 +163,70 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             if (WaypointModel != null)
             {
                 WaypointModel.Identifier = Identifier;
-                WaypointModel.Longitude = Longitude;
-                WaypointModel.Latitude = Latitude;
+
+                if (ValidateLatitude(Latitude))
+                {
+                    object converted = _latConverter.ConvertBack(Latitude, typeof (double), null,
+                        CultureInfo.InvariantCulture);
+                    if (converted is double)
+                    {
+                        WaypointModel.Latitude = (double)converted;
+                    }
+                }
+
+                if (ValidateLongitude(Longitude))
+                {
+                    object converted = _lonConverter.ConvertBack(Longitude, typeof(double), null,
+                        CultureInfo.InvariantCulture);
+                    if (converted is double)
+                    {
+                        WaypointModel.Longitude = (double)converted;
+                    }
+                }
             }
+        }
+
+        private bool ValidateLongitude(string val)
+        {
+            var valid = _lonConverter.ValidateString(val);
+            if (valid)
+            {
+                ErrorsContainer.ClearErrors(() => Longitude);
+            }
+            else
+            {
+                ErrorsContainer.SetErrors(() => Longitude, new [] { new ValidationResult(false, "Please use the E123°45.6 or W12345.6 format."), });
+            }
+
+            RaiseErrorsChanged(() => Longitude);
+            _saveCommand?.RaiseCanExecuteChanged();
+            return valid;
+        }
+
+        private bool ValidateLatitude(string val)
+        {
+            var valid = _latConverter.ValidateString(val);
+            if (valid)
+            {
+                ErrorsContainer.ClearErrors(() => Latitude);
+            }
+            else
+            {
+                ErrorsContainer.SetErrors(() => Latitude, new[] { new ValidationResult(false, "Please use the E123°45.6 or W12345.6 format."), });
+            }
+
+            RaiseErrorsChanged(() => Latitude);
+            _saveCommand?.RaiseCanExecuteChanged();
+            return valid;
         }
         #endregion
 
-
         #region INavigationAware
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext)
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            base.OnNavigatedTo(navigationContext);
 
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
             if (!navigationContext.Parameters.ContainsKey(NAV_PARAM_WAYPOINT))
             {
                 _logger.Log(string.Format("{0}:OnNavigatedTo - The navigationContext doesn't contain NAV_PARAM_WAPYPOINT.", GetType().FullName),
@@ -180,7 +243,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
             WaypointModel = (WaypointModel)navigationContext.Parameters[NAV_PARAM_WAYPOINT];
             _regionNavSvc = navigationContext.NavigationService;
-        } 
+        }
+
         #endregion
+
     }
 }

@@ -17,6 +17,8 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter
     [ValueConversion(typeof(double), typeof(string))]
     public class CoordsLatNumToFmcConverter : IValueConverter
     {
+        private const string CoordRegex = @"([NS]{1})(\d{2})°?(\d{2})\.(\d)";
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is double))
@@ -60,8 +62,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter
 
             //([NS]{1})(\d{2})°?(\d{2})\.(\d)
 
-            var r = new Regex(@"([NS]{1})(\d{2})°?(\d{2})\.(\d)");
-            var m = r.Match((string)value);
+            var m = Regex.Match((string)value, CoordRegex);
 
             var hemisphere = m.Groups[1].Value;
             var deg = m.Groups[2].Value;
@@ -91,6 +92,12 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter
 
             double numval = hemi * (degi + ((double)mini / 60) + ((double)deci / 600));
             return numval;
+        }
+
+        public bool ValidateString(string val)
+        {
+            var m = Regex.Match(val, CoordRegex);
+            return m.Success;
         }
     }
 }
