@@ -52,6 +52,7 @@ namespace PlgToFp.Windows.Infrastructure.ViewModel
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
         protected virtual void RaiseErrorsChanged(string propertyName)
         {
+            OnPropertyChanged(() => HasErrors);
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 

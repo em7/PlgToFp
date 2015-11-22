@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="700"
              d:DataContext="{d:DesignInstance local:EditWaypointViewModelDesign, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -50,17 +54,23 @@
             <StackPanel Margin="0,0,0,15">
                 <Label Content="Latitude"
                        Style="{StaticResource BaseLabelStyle}" />
-                <TextBox Text="{Binding Latitude}"
+                <TextBox Text="{Binding Latitude, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
             	         Style="{StaticResource BaseTextBoxStyle}"
                          />
+                <Label Content="{Binding LatitudeErrors}"
+                       Visibility="{Binding HasErrors, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                       Style="{StaticResource ErrorLabelStyle}" />
             </StackPanel>
 
             <StackPanel Margin="0,0,0,15">
                 <Label Content="Longitude"
                        Style="{StaticResource BaseLabelStyle}" />
-                <TextBox Text="{Binding Longitude}"
+                <TextBox Text="{Binding Longitude, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
             	         Style="{StaticResource BaseTextBoxStyle}"
                          />
+                <Label Content="{Binding LongitudeErrors}"
+                       Visibility="{Binding HasErrors, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                       Style="{StaticResource ErrorLabelStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"

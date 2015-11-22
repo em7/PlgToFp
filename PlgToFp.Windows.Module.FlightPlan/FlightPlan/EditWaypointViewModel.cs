@@ -77,9 +77,19 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             set
             {
                 SetProperty(ref _longitude, value);
-                ValidateLatitude(value);
+                ValidateLongitude(value);
                 OnPropertyChanged(() => Longitude);
             }
+        }
+
+        public string LatitudeErrors
+        {
+            get { return GetErrorsFor(() => Latitude); }
+        }
+
+        public string LongitudeErrors
+        {
+            get { return GetErrorsFor(() => Longitude); }
         }
         #endregion
 
@@ -200,6 +210,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
             RaiseErrorsChanged(() => Longitude);
             _saveCommand?.RaiseCanExecuteChanged();
+            OnPropertyChanged(() => LongitudeErrors);
             return valid;
         }
 
@@ -212,12 +223,21 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
             else
             {
-                ErrorsContainer.SetErrors(() => Latitude, new[] { new ValidationResult(false, "Please use the E123°45.6 or W12345.6 format."), });
+                ErrorsContainer.SetErrors(() => Latitude, new[] { new ValidationResult(false, "Please use the N23°45.6 or S2345.6 format."), });
             }
 
             RaiseErrorsChanged(() => Latitude);
             _saveCommand?.RaiseCanExecuteChanged();
+            OnPropertyChanged(() => LatitudeErrors);
             return valid;
+        }
+
+        private string GetErrorsFor<T>(Expression<Func<T>> propertyExpression)
+        {
+            var errors = ErrorsContainer.GetErrors(PropertySupport.ExtractPropertyName(propertyExpression));
+            var errStrs = errors.Where(r => !r.IsValid).Select(r => r.ErrorContent.ToString());
+            var errStr = string.Join(Environment.NewLine, errStrs);
+            return errStr;
         }
         #endregion
 

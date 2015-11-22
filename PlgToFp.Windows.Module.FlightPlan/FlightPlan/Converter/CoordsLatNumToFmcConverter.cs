@@ -17,7 +17,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converter
     [ValueConversion(typeof(double), typeof(string))]
     public class CoordsLatNumToFmcConverter : IValueConverter
     {
-        private const string CoordRegex = @"([NS]{1})(\d{2})°?(\d{2})\.(\d)";
+        private const string CoordRegex = @"^([NS]){1}(\d{2})°?(\d{2})\.(\d)$";
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
