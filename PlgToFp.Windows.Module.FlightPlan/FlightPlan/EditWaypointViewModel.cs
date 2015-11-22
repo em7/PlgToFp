@@ -54,6 +54,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             set
             {
                 SetProperty(ref _identifier, value);
+                ValidateIdentifier(value);
                 OnPropertyChanged(() => Identifier);
             }
         }
@@ -80,6 +81,11 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
                 ValidateLongitude(value);
                 OnPropertyChanged(() => Longitude);
             }
+        }
+
+        public string IdentifierErrors
+        {
+            get { return GetErrorsFor(() => Identifier); }
         }
 
         public string LatitudeErrors
@@ -127,6 +133,9 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
 
         private void HandleSaveCmd()
         {
+            if (!CanSaveCmd())
+                return;
+
             UpdateWaypointVmProperties();
 
             if (!CanGoBackCmd())
@@ -172,7 +181,10 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
         {
             if (WaypointModel != null)
             {
-                WaypointModel.Identifier = Identifier;
+                if (ValidateIdentifier(Identifier))
+                {
+                    WaypointModel.Identifier = Identifier;
+                }
 
                 if (ValidateLatitude(Latitude))
                 {
@@ -196,6 +208,29 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
         }
 
+        private bool ValidateIdentifier(string val)
+        {
+            var valid = (!string.IsNullOrWhiteSpace(val))
+                        && (val.Length > 1)
+                        && (val.Length < 6);
+
+            if (valid)
+            {
+                ErrorsContainer.ClearErrors(() => Identifier);
+            }
+            else
+            {
+                ErrorsContainer.ClearErrors(() => Identifier);
+                ErrorsContainer.SetErrors(() => Identifier, new [] {new ValidationResult(false, 
+                    "Identifier is mandatory. Should contain 2-5 letters and numbers.") });
+            }
+
+            RaiseErrorsChanged(() => Identifier);
+            _saveCommand?.RaiseCanExecuteChanged();
+            OnPropertyChanged(() => IdentifierErrors);
+            return valid;
+        }
+
         private bool ValidateLongitude(string val)
         {
             var valid = _lonConverter.ValidateString(val);
@@ -205,6 +240,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
             else
             {
+                ErrorsContainer.ClearErrors(() => Longitude);
                 ErrorsContainer.SetErrors(() => Longitude, new [] { new ValidationResult(false, "Please use the E123°45.6 or W12345.6 format."), });
             }
 
@@ -223,6 +259,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             }
             else
             {
+                ErrorsContainer.ClearErrors(() => Latitude);
                 ErrorsContainer.SetErrors(() => Latitude, new[] { new ValidationResult(false, "Please use the N23°45.6 or S2345.6 format."), });
             }
 
