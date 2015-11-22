@@ -77,13 +77,29 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Controls
             var mDistX = maxX - minX; //the maximum X distance between points
             var mDistY = maxY - minY;
 
+            double scale;
+            double offsetX = 5; //5 is a margin
+            double offsetY = -5;
+            double height = ActualHeight - 10;
+            double width = ActualWidth - 10;
+            if (mDistX >= mDistY)
+            {
+                scale = Math.Abs(width / mDistX);
+                offsetY += (height - (mDistY*scale))/2d;
+            }
+            else
+            {
+                scale = Math.Abs(height / mDistY);
+                offsetX += (width - (mDistX*scale))/2d;
+            }
+
             Point? prevPoint = null;
 
             foreach (var point in MapPoints)
             {
                 //calc coordinates for this point
-                var x = ((point.Longitude - minX) / mDistX) * ActualWidth;
-                var y = ActualHeight - (((point.Latitude - minY) / mDistY) * ActualHeight);
+                var x = ((point.Longitude - minX)*scale) + offsetX;
+                var y = (height - ((point.Latitude - minY) * scale)) - offsetY;
 
                 //draw its marker
                 drawingContext.DrawRectangle(Brushes.Magenta,
