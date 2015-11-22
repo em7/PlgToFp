@@ -183,6 +183,258 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan.Converters.Tests
         }
         #endregion
 
+        #region Positive ConvertBack
+        [TestMethod()]
+        public void ConvertBackPositive0Test()
+        {
+            var coord = "E000°00.0";
+            var coordNoDeg = "E00000.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0d, (double)res1, "E000°00.0 should be converted to 0d");
+            Assert.AreEqual(0d, (double)res2, "E000°00.0 should be converted to 0d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNullTest()
+        {
+            object coord = null;
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0d, (double)res1, "null should be converted to 0d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackEmptyTest()
+        {
+            object coord = "";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0d, (double)res1, "empty string should be converted to 0d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveSecondTest()
+        {
+            var coord = "E000°00.6";
+            var coordNoDeg = "E00000.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0.01d, (double)res1, "E000°00.6 should be converted to 0.01d");
+            Assert.AreEqual(0.01d, (double)res2, "E00000.6 should be converted to 0.01d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveMinuteTest()
+        {
+            var coord = "E000°06.0";
+            var coordNoDeg = "E00006.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0.1d, (double)res1, "E000°06.0 should be converted to 0.1d");
+            Assert.AreEqual(0.1d, (double)res2, "E00006.0 should be converted to 0.1d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveDegreeTest()
+        {
+            var coord = "E025°00.0";
+            var coordNoDeg = "E02500.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(25d, (double)res1, "E025°00.0 should be converted to 25d");
+            Assert.AreEqual(25d, (double)res2, "E02500.0 should be converted to 25d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveDegMinTest()
+        {
+            var coord = "E025°00.6";
+            var coordNoDeg = "E02500.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(25.01d, (double)res1, "E025°00.6 should be converted to 25.01d");
+            Assert.AreEqual(25.01d, (double)res2, "E02500.6 should be converted to 25.01d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveMinSecTest()
+        {
+            var coord = "E000°15.6";
+            var coordNoDeg = "E00015.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0.26d, (double)res1, "E025°00.0 should be converted to 0.26d");
+            Assert.AreEqual(0.26d, (double)res2, "E02500.0 should be converted to 0.26d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackPositiveCoordsest()
+        {
+            var coord = "E025°15.6";
+            var coordNoDeg = "E02515.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(25.26d, (double)res1, "E025°15.6 should be converted to 25.26d");
+            Assert.AreEqual(25.26d, (double)res2, "E02515.6 should be converted to 25.26d");
+        }
+        #endregion
+
+        #region Negative ConvertBack
+        [TestMethod()]
+        public void ConvertBackNegative0Test()
+        {
+            var coord = "W000°00.0";
+            var coordNoDeg = "W00000.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(0d, (double)res1, "W000°00.0 should be converted to 0d");
+            Assert.AreEqual(0d, (double)res2, "W000°00.0 should be converted to 0d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeSecondTest()
+        {
+            var coord = "W000°00.6";
+            var coordNoDeg = "W00000.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-0.01d, (double)res1, "W000°00.6 should be converted to -0.01d");
+            Assert.AreEqual(-0.01d, (double)res2, "W00000.6 should be converted to -0.01d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeMinuteTest()
+        {
+            var coord = "W000°06.0";
+            var coordNoDeg = "W00006.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-0.1d, (double)res1, "W000°06.0 should be converted to -0.1d");
+            Assert.AreEqual(-0.1d, (double)res2, "W00006.0 should be converted to -0.1d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeDegreeTest()
+        {
+            var coord = "W025°00.0";
+            var coordNoDeg = "W02500.0";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-25d, (double)res1, "W025°00.0 should be converted to -25d");
+            Assert.AreEqual(-25d, (double)res2, "W02500.0 should be converted to -25d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeDegMinTest()
+        {
+            var coord = "W025°00.6";
+            var coordNoDeg = "W02500.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-25.01d, (double)res1, "W025°00.6 should be converted to -25.01d");
+            Assert.AreEqual(-25.01d, (double)res2, "W02500.6 should be converted to -25.01d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeMinSecTest()
+        {
+            var coord = "W000°15.6";
+            var coordNoDeg = "W00015.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-0.26d, (double)res1, "W025°00.0 should be converted to -0.26d");
+            Assert.AreEqual(-0.26d, (double)res2, "W02500.0 should be converted to -0.26d");
+        }
+
+        [TestMethod()]
+        public void ConvertBackNegativeCoordsest()
+        {
+            var coord = "W025°15.6";
+            var coordNoDeg = "W02515.6";
+
+            var res1 = _converter.ConvertBack(coord, typeof(double), null, CultureInfo.InvariantCulture);
+            var res2 = _converter.ConvertBack(coordNoDeg, typeof(double), null, CultureInfo.InvariantCulture);
+
+            Assert.IsInstanceOfType(res1, typeof(double), "The converted value should be type of double");
+            Assert.IsInstanceOfType(res2, typeof(double), "The converted value should be type of double");
+
+            Assert.AreEqual(-25.26d, (double)res1, "W025°15.6 should be converted to -25.26d");
+            Assert.AreEqual(-25.26d, (double)res2, "W02515.6 should be converted to -25.26d");
+        }
+        #endregion
+
         //[TestMethod()]
         //public void ConvertBackTest()
         //{
