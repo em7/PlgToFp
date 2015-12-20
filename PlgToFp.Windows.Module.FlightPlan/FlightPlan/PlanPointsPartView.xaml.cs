@@ -147,6 +147,7 @@ namespace PlgToFp.Windows.Module.FlightPlan.FlightPlan
             DataObject data = new DataObject(WAYPOINT_DATA_FORMAT, item);
             DragDropEffects de = DragDrop.DoDragDrop(listView, data, DragDropEffects.Move);
 
+            //DoDragDrop is blocking operation, this will be called when done:
             listView.PreviewDragOver -= ListViewDragOver;
             listView.DragLeave -= ListViewDragLeave;
             listView.DragEnter -= ListViewDragEnter;
